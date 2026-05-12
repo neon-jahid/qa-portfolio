@@ -4,7 +4,6 @@ import StatGrid from '../common/StatGrid';
 import { portfolio } from '../../data/portfolioData';
 
 export default function HeroSection() {
-
     return (
         <section
             id='home'
@@ -32,8 +31,8 @@ export default function HeroSection() {
                     </div>
                 </div>
 
-                <div className='rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 shadow-2xl shadow-cyan-950/40'>
-                    <div className='rounded-[1.5rem] bg-slate-900 p-6'>
+                <div className='rounded-[2rem] border border-white/10 bg-white/[0.04] p-4 md:p-6 shadow-2xl shadow-cyan-950/40'>
+                    <div className='rounded-[1.5rem] bg-slate-900 p-3 md:p-6'>
                         <div className='mb-6 flex h-28 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-400 to-blue-600'>
                             <Gauge
                                 size={48}

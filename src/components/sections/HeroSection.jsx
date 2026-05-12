@@ -1,4 +1,4 @@
-import { Download, Gauge } from 'lucide-react';
+import { Download } from 'lucide-react';
 import Container from '../common/Container';
 import StatGrid from '../common/StatGrid';
 import { portfolio } from '../../data/portfolioData';

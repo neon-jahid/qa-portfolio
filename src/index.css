@@ -8,7 +8,7 @@ body {
     margin: 0;
     background: #020617;
 }
-@keyframes speedometer {
+/* @keyframes speedometer {
     0% {
         transform: rotate(-70deg) scale(1);
     }
@@ -24,4 +24,20 @@ body {
     100% {
         transform: rotate(360deg) scale(1);
     }
+} */
+
+@keyframes speed-needle {
+    0% {
+        transform: rotate(-40deg);
+    }
+    50% {
+        transform: rotate(120deg);
+    }
+    100% {
+        transform: rotate(-40deg);
+    }
+}
+
+.animate-speed-needle {
+    animation: speed-needle 1.4s ease-in-out infinite;
 }

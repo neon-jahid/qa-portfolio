@@ -16,7 +16,7 @@ export default function HeroSection() {
                         {portfolio.name}
                         <span className='block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent'>{portfolio.role}</span>
                     </h1>
-                    <p className='mt-6 max-w-2xl text-lg leading-8 text-slate-300'>{portfolio.heroTagline}</p>
+                    <p className='mt-6 max-w-2xl text-lg leading-8 text-slate-300 text-justify'>{portfolio.heroTagline}</p>
                     <div className='mt-8 flex flex-wrap gap-4'>
                         <a
                             href='#contact'
@@ -33,12 +33,45 @@ export default function HeroSection() {
 
                 <div className='rounded-[2rem] border border-white/10 bg-white/[0.04] p-4 md:p-6 shadow-2xl shadow-cyan-950/40'>
                     <div className='rounded-[1.5rem] bg-slate-900 p-3 md:p-6'>
-                        <div className='mb-6 flex h-28 items-center justify-center rounded-3xl bg-gradient-to-br from-cyan-400 to-blue-600'>
-                            <Gauge
-                                size={48}
-                                className='text-white'
-                            />
+                        <div className='group mb-6 flex h-28 items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-400 to-blue-600'>
+                            <div className='relative flex items-center justify-center'>
+                                <svg
+                                    width='120'
+                                    height='70'
+                                    viewBox='0 0 120 70'
+                                    className='overflow-visible'>
+                                    {/* Arc */}
+                                    <path
+                                        d='M10 60 A50 50 0 0 1 110 60'
+                                        fill='none'
+                                        stroke='rgba(255,255,255,0.35)'
+                                        strokeWidth='8'
+                                        strokeLinecap='round'
+                                    />
+
+                                    {/* Needle */}
+                                    <line
+                                        x1='60'
+                                        y1='60'
+                                        x2='10'
+                                        y2='60'
+                                        stroke='white'
+                                        strokeWidth='4'
+                                        strokeLinecap='round'
+                                        className='origin-[60px_60px] transition-transform duration-2500 ease-out group-hover:rotate-[180deg]'
+                                    />
+
+                                    {/* Center Dot */}
+                                    <circle
+                                        cx='60'
+                                        cy='60'
+                                        r='6'
+                                        fill='white'
+                                    />
+                                </svg>
+                            </div>
                         </div>
+
                         <h3 className='text-2xl font-bold text-white'>QA Profile</h3>
                         <p className='mt-3 text-slate-300 text-justify'>{portfolio.summary}</p>
                         <div className='mt-6'>

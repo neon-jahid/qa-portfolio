@@ -40,7 +40,7 @@ export default function HeroSection() {
                             />
                         </div>
                         <h3 className='text-2xl font-bold text-white'>QA Profile</h3>
-                        <p className='mt-3 text-slate-300'>{portfolio.summary}</p>
+                        <p className='mt-3 text-slate-300 text-justify'>{portfolio.summary}</p>
                         <div className='mt-6'>
                             <StatGrid stats={portfolio.stats} />
                         </div>

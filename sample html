@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Jahid Hasan — SQA Engineer</title>
+<style>
+  :root{
+    --ink:#0C1220; --ink2:#17202E; --text:#232C3B; --muted:#5D6675;
+    --line:#E7EAEE; --bg:#FFFFFF; --alt:#F7F9FA;
+    --green:#0BA05F; --green-tint:#E7F6EF; --green-dark:#08744A;
+    --hero-line:#232B3C; --hero-muted:#9AA3B2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);
+       -webkit-font-smoothing:antialiased;font-size:16px;line-height:1.6}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 48px}
+
+  /* ---------- NAV + HERO (dark) ---------- */
+  .hero{background:var(--ink);color:#EDF0F4}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:26px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:#fff}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--green)}
+  .nav-links{display:flex;gap:30px;font-size:14px;color:var(--hero-muted)}
+  .nav-links span.active{color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:8px;border-radius:8px;font-size:14px;font-weight:600;padding:11px 20px}
+  .btn-green{background:var(--green);color:#fff}
+  .btn-ghost{border:1px solid #2C3547;color:#E6EAF0}
+  .btn-ghost-dark{border:1px solid #D6DBE2;color:var(--ink2)}
+
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;padding:64px 0 72px}
+  .chip-avail{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:#B9EFD4;
+    background:rgba(11,160,95,.14);border:1px solid rgba(11,160,95,.35);border-radius:100px;padding:6px 14px;margin-bottom:26px}
+  .chip-avail .pulse{width:7px;height:7px;border-radius:50%;background:var(--green)}
+  h1{font-size:52px;line-height:1.12;font-weight:800;letter-spacing:-.02em;color:#fff}
+  h1 .g{color:var(--green)}
+  .hero-sub{margin-top:22px;font-size:16.5px;color:var(--hero-muted);max-width:46ch}
+  .hero-ctas{display:flex;gap:14px;margin-top:34px}
+  .toolrow{margin-top:52px;padding-top:24px;border-top:1px solid var(--hero-line)}
+  .toolrow .lbl{font-size:11px;letter-spacing:.14em;color:#6B7484;text-transform:uppercase;margin-bottom:14px}
+  .tools{display:flex;gap:26px;flex-wrap:wrap;font-size:14px;font-weight:600;color:#C3CAD5}
+
+  /* terminal card — signature */
+  .term{background:#101828;border:1px solid #26304A;border-radius:14px;overflow:hidden;
+        box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:13px 18px;border-bottom:1px solid #1D2740;background:#0D1424}
+  .term-bar i{width:11px;height:11px;border-radius:50%;display:block}
+  .term-bar .r{background:#FF5F57}.term-bar .y{background:#FEBC2E}.term-bar .gn{background:#28C840}
+  .term-bar .t{margin-left:10px;font-size:12px;color:#7A8496}
+  .term-body{padding:22px 24px;font-size:13px;line-height:2.05;color:#AEB8C8}
+  .term-body .cmd{color:#E8ECF3}.term-body .p{color:#4ADE94}
+  .term-body .dim{color:#5E6980}
+  .term-sum{margin-top:10px;padding-top:14px;border-top:1px solid #1D2740;color:#E8ECF3;font-weight:600}
+  .term-sum b{color:#4ADE94}
+
+  /* ---------- STATS ---------- */
+  .stats{border-bottom:1px solid var(--line)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
+  .stat{padding:38px 10px;text-align:center;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:none}
+  .stat .n{font-size:34px;font-weight:800;letter-spacing:-.02em;color:var(--ink2)}
+  .stat .n span{color:var(--green)}
+  .stat .l{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:84px 0}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--green-dark);
+    text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .eyebrow::before{content:"";width:22px;height:1.5px;background:var(--green)}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px}
+  h2{font-size:32px;font-weight:800;letter-spacing:-.02em;color:var(--ink2)}
+  .sec-note{font-size:14px;color:var(--muted)}
+
+  /* projects */
+  .alt{background:var(--alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 26px 24px;
+        display:flex;flex-direction:column}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--green-dark);
+       background:var(--green-tint);border-radius:6px;padding:4px 10px;align-self:flex-start}
+  .card h3{font-size:18.5px;font-weight:700;color:var(--ink2);margin:16px 0 8px}
+  .card p{font-size:14px;color:var(--muted);flex:1}
+  .cov{margin-top:20px}
+  .cov .row{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:7px}
+  .cov .row b{font-family:'JetBrains Mono',monospace;color:var(--green-dark);font-weight:600}
+  .bar{height:5px;background:#ECEFF2;border-radius:100px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--green);border-radius:100px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+  .meta span{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 9px}
+
+  /* skills */
+  .skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .skill-col{border:1px solid var(--line);border-radius:14px;padding:26px}
+  .skill-col h4{font-size:15px;font-weight:700;color:var(--ink2);margin-bottom:4px}
+  .skill-col .d{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+  .skill-list{display:flex;flex-direction:column;gap:11px}
+  .skill{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text)}
+  .skill::before{content:"✓";font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);
+    background:var(--green-tint);width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+  /* experience */
+  .xp{display:grid;grid-template-columns:150px 1fr;row-gap:0;column-gap:0}
+  .xp-item{display:contents}
+  .xp-date{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);padding:2px 0 44px;text-align:left}
+  .xp-body{position:relative;padding:0 0 44px 34px;border-left:1.5px solid var(--line)}
+  .xp-item:last-child .xp-body{padding-bottom:6px}
+  .xp-body::before{content:"";position:absolute;left:-6.5px;top:5px;width:12px;height:12px;border-radius:50%;
+    background:#fff;border:2.5px solid var(--green)}
+  .xp-body h4{font-size:16.5px;font-weight:700;color:var(--ink2)}
+  .xp-body .role{font-size:13.5px;color:var(--green-dark);font-weight:600;margin:2px 0 8px}
+  .xp-body p{font-size:14px;color:var(--muted);max-width:62ch}
+
+  /* contact (dark) */
+  .contact{background:var(--ink);color:#EDF0F4;padding:84px 0}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .contact h2{color:#fff}
+  .contact h2 .g{color:var(--green)}
+  .contact .lead{margin-top:16px;font-size:15px;color:var(--hero-muted);max-width:44ch}
+  .cinfo{margin-top:34px;display:flex;flex-direction:column;gap:20px}
+  .cinfo .ci{display:flex;align-items:center;gap:14px}
+  .cinfo .ic{width:40px;height:40px;border-radius:10px;background:#161F32;border:1px solid #26304A;
+    display:flex;align-items:center;justify-content:center;font-size:15px;color:#4ADE94}
+  .cinfo .kk{font-size:11.5px;color:#6B7484;text-transform:uppercase;letter-spacing:.1em}
+  .cinfo .vv{font-size:14.5px;color:#E6EAF0;font-weight:600}
+  .form{background:#101828;border:1px solid #26304A;border-radius:14px;padding:26px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .fld{background:#0D1424;border:1px solid #222C44;border-radius:8px;padding:13px 15px;font-size:13.5px;color:#5E6980;margin-bottom:14px}
+  .fld.ta{height:120px}
+  .fsend{background:var(--green);color:#fff;text-align:center;border-radius:8px;padding:13px;font-size:14px;font-weight:600}
+  .footer{border-top:1px solid var(--hero-line);padding:26px 0;display:flex;justify-content:space-between;
+    font-size:12.5px;color:#6B7484}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <nav>
+      <div class="brand"><span class="dot"></span>Jahid Hasan</div>
+      <div class="nav-links"><span class="active">Home</span><span>About</span><span>Projects</span><span>Experience</span><span>Blog</span></div>
+      <div class="btn btn-green">Get in touch →</div>
+    </nav>
+
+    <div class="hero-grid">
+      <div>
+        <div class="chip-avail"><span class="pulse"></span>Available for new opportunities</div>
+        <h1>Software quality,<br>engineered — <span class="g">not<br>assumed.</span></h1>
+        <p class="hero-sub">I'm an SQA engineer with 4+ years of experience building test automation,
+        API and performance testing that lets teams ship with confidence.</p>
+        <div class="hero-ctas">
+          <div class="btn btn-green">View case studies →</div>
+          <div class="btn btn-ghost">Download resume ↓</div>
+        </div>
+        <div class="toolrow">
+          <div class="lbl">Testing toolbelt</div>
+          <div class="tools"><span>Playwright</span><span>Selenium</span><span>Cypress</span><span>Postman</span><span>k6</span><span>Jira</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="term mono">
+          <div class="term-bar"><i class="r"></i><i class="y"></i><i class="gn"></i><span class="t mono">regression — full suite</span></div>
+          <div class="term-body">
+            <div class="cmd">$ npx playwright test --project=chromium</div>
+            <div><span class="p">✓</span> auth/login.spec.ts <span class="dim">(3.2s)</span></div>
+            <div><span class="p">✓</span> checkout/payment-flow.spec.ts <span class="dim">(6.8s)</span></div>
+            <div><span class="p">✓</span> api/orders.contract.spec.ts <span class="dim">(1.4s)</span></div>
+            <div><span class="p">✓</span> regression/search-filters.spec.ts <span class="dim">(4.1s)</span></div>
+            <div class="term-sum"><b>248 passed</b>, 0 failed <span class="dim">· 4m 12s · CI #1,142</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><div class="n">4<span>+</span></div><div class="l">Years in QA</div></div>
+    <div class="stat"><div class="n">1,200<span>+</span></div><div class="l">Tests automated</div></div>
+    <div class="stat"><div class="n">300<span>+</span></div><div class="l">Defects caught pre-release</div></div>
+    <div class="stat"><div class="n">70<span>%</span></div><div class="l">Faster regression cycles</div></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">featured work</div>
+        <h2>Selected QA case studies</h2>
+      </div>
+      <div class="sec-note">View all projects →</div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="tag">E2E AUTOMATION</span>
+        <h3>E-commerce Regression Suite</h3>
+        <p>End-to-end automation covering checkout, payments and inventory for a high-traffic retail platform. Runs on every merge via CI.</p>
+        <div class="cov">
+          <div class="row"><span>Critical-path coverage</span><b>92%</b></div>
+          <div class="bar"><i style="width:92%"></i></div>
+        </div>
+        <div class="meta"><span>Playwright</span><span>TypeScript</span><span>GitHub Actions</span></div>
+      </div>
+      <div class="card">
+        <span class="tag">API &amp; CONTRACT</span>
+        <h3>Banking API Test Framework</h3>
+        <p>Contract, integration and negative testing for a financial services API — 400+ assertions across every release candidate.</p>
+        <div class="cov">
+          <div class="row"><span>Endpoint coverage</span><b>100%</b></div>
+          <div class="bar"><i style="width:100%"></i></div>
+        </div>
+        <div class="meta"><span>Postman</span><span>Newman</span><span>REST Assured</span></div>
+      </div>
+      <div class="card">
+        <span class="tag">PERFORMANCE</span>
+        <h3>Load Testing at Scale</h3>
+        <p>Performance test suite simulating 10k concurrent users; identified bottlenecks that cut p95 response time by half.</p>
+        <div class="cov">
+          <div class="row"><span>p95 improvement</span><b>−52%</b></div>
+          <div class="bar"><i style="width:52%"></i></div>
+        </div>
+        <div class="meta"><span>k6</span><span>JMeter</span><span>Grafana</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">capabilities</div>
+        <h2>Skills &amp; tooling</h2>
+      </div>
+    </div>
+    <div class="skill-cols">
+      <div class="skill-col">
+        <h4>Test Automation</h4>
+        <div class="d">UI and end-to-end</div>
+        <div class="skill-list">
+          <div class="skill">Playwright &amp; Selenium WebDriver</div>
+          <div class="skill">Cypress</div>
+          <div class="skill">Appium (Android / iOS)</div>
+          <div class="skill">JavaScript / TypeScript / Python</div>
+          <div class="skill">Page Object &amp; fixture patterns</div>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h4>API &amp; Performance</h4>
+        <div class="d">Beyond the interface</div>
+        <div class="skill-list">
+          <div class="skill">Postman, Newman &amp; REST Assured</div>
+          <div class="skill">Contract &amp; schema validation</div>
+          <div class="skill">k6 &amp; JMeter load testing</div>
+          <div class="skill">SQL &amp; test data management</div>
+          <div class="skill">Security testing basics (OWASP)</div>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h4>Process &amp; Delivery</h4>
+        <div class="d">Quality as a workflow</div>
+        <div class="skill-list">
+          <div class="skill">CI/CD pipelines (GitHub Actions)</div>
+          <div class="skill">Jira, TestRail &amp; Zephyr</div>
+          <div class="skill">Test planning &amp; risk analysis</div>
+          <div class="skill">Bug advocacy &amp; triage</div>
+          <div class="skill">Agile / Scrum ceremonies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="eyebrow">career</div>
+        <h2>Experience</h2>
+      </div>
+    </div>
+    <div class="xp">
+      <div class="xp-item">
+        <div class="xp-date">2023 — Present</div>
+        <div class="xp-body">
+          <h4>TechNova Solutions</h4>
+          <div class="role">Senior SQA Engineer</div>
+          <p>Leading test automation strategy for three product teams. Built the Playwright framework now covering 1,200+ scenarios and gating every production release.</p>
+        </div>
+      </div>
+      <div class="xp-item">
+        <div class="xp-date">2021 — 2023</div>
+        <div class="xp-body">
+          <h4>FinEdge Ltd.</h4>
+          <div class="role">SQA Engineer</div>
+          <p>Owned API and regression testing for a payments platform. Introduced contract testing that eliminated an entire class of integration defects.</p>
+        </div>
+      </div>
+      <div class="xp-item">
+        <div class="xp-date">2020 — 2021</div>
+        <div class="xp-body">
+          <h4>Digital Craft Agency</h4>
+          <div class="role">Junior QA Engineer</div>
+          <p>Manual and exploratory testing across web and mobile client projects; wrote the team's first automated smoke suites.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow" style="color:#4ADE94">contact</div>
+        <h2>Let's ship quality <span class="g">together.</span></h2>
+        <p class="lead">Open to discussing QA strategy, automation projects, or full-time opportunities.</p>
+        <div class="cinfo">
+          <div class="ci"><div class="ic">✉</div><div><div class="kk">Email</div><div class="vv">hello@jahidhasan.dev</div></div></div>
+          <div class="ci"><div class="ic">◎</div><div><div class="kk">Location</div><div class="vv">Dhaka, Bangladesh</div></div></div>
+          <div class="ci"><div class="ic">✆</div><div><div class="kk">Phone</div><div class="vv">+880 17XX-XXXXXX</div></div></div>
+        </div>
+      </div>
+      <div class="form">
+        <div class="frow"><div class="fld">Name</div><div class="fld">Email</div></div>
+        <div class="fld ta">Tell me about your project…</div>
+        <div class="fsend">Send message →</div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>© 2026 Jahid Hasan — SQA Engineer</span>
+      <span class="mono">status: <span style="color:#4ADE94">✓ all systems tested</span></span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

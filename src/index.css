@@ -41,3 +41,14 @@ body {
 .animate-speed-needle {
     animation: speed-needle 1.4s ease-in-out infinite;
 }
+@keyframes qa-flow {
+    to {
+        background-position: 0 14px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-\[qa-flow_1\.2s_linear_infinite\] {
+        animation: none;
+    }
+}

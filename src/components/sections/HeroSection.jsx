@@ -106,10 +106,13 @@ export default function HeroSection() {
                 </div>
 
                 {/* ---------------- Middle: QA checks ----------------
-                    Mobile / tablet : 2-column grid of compact cards
-                    xl and up       : vertical column following a dashed curve  */}
+    মোবাইল/ট্যাবলেট : বাঁ পাশে খাড়া রেল, কার্ড উপর-নিচে
+    xl এবং তার উপরে : বাঁকা পথ ধরে কলাম  */}
                 <div className='relative xl:self-stretch'>
-                    {/* Dashed curve is xl-only — it needs the tall narrow column to make sense */}
+                    {/* মোবাইলের খাড়া রেল */}
+                    <span className='pointer-events-none absolute bottom-3 left-[19px] top-3 w-px animate-[qa-flow_1.2s_linear_infinite] bg-[repeating-linear-gradient(to_bottom,rgba(34,211,238,0.55)_0_5px,transparent_5px_14px)] bg-[length:1px_14px] xl:hidden' />
+
+                    {/* xl এর বাঁকা পথ */}
                     <svg
                         className='absolute inset-0 hidden h-full w-full xl:block'
                         viewBox='0 0 190 620'
@@ -132,7 +135,6 @@ export default function HeroSection() {
                             />
                         </path>
 
-                        {/* পথ ধরে ছুটে চলা পালস */}
                         <circle
                             r='4'
                             fill='rgb(34,211,238)'>
@@ -149,33 +151,16 @@ export default function HeroSection() {
                                 repeatCount='indefinite'
                             />
                         </circle>
-
-                        {/* দ্বিতীয় পালস, একটু দেরিতে শুরু */}
-                        <circle
-                            r='2.5'
-                            fill='rgba(34,211,238,0.6)'>
-                            <animateMotion
-                                dur='5s'
-                                begin='2.5s'
-                                repeatCount='indefinite'>
-                                <mpath href='#qaFlowPath' />
-                            </animateMotion>
-                            <animate
-                                attributeName='opacity'
-                                values='0;1;1;0'
-                                keyTimes='0;0.08;0.92;1'
-                                dur='5s'
-                                begin='2.5s'
-                                repeatCount='indefinite'
-                            />
-                        </circle>
                     </svg>
 
-                    <div className='relative grid grid-cols-2 gap-3 sm:grid-cols-4 xl:flex xl:h-full xl:flex-col xl:justify-between xl:gap-0 xl:py-2'>
+                    <div className='relative flex flex-col gap-4 pl-12 xl:h-full xl:justify-between xl:gap-0 xl:py-2 xl:pl-0'>
                         {heroChecks.slice(0, 4).map((check, i) => (
                             <div
                                 key={check.title}
-                                className={`rounded-2xl border border-cyan-400/15 bg-slate-900/80 px-4 py-3 shadow-lg shadow-cyan-950/40 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/35 xl:w-fit ${i % 2 === 0 ? 'xl:translate-x-6' : ''}`}>
+                                className={`relative rounded-2xl border border-cyan-400/15 bg-slate-900/80 px-4 py-3 shadow-lg shadow-cyan-950/40 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/35 xl:w-fit ${i % 2 === 0 ? 'xl:translate-x-6' : ''}`}>
+                                {/* রেলের উপরের নোড */}
+                                <span className='absolute -left-[34px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-cyan-400 ring-4 ring-cyan-400/15 xl:hidden' />
+
                                 <div className='flex items-center gap-3'>
                                     <CheckCircle2
                                         size={20}
@@ -191,7 +176,6 @@ export default function HeroSection() {
                         ))}
                     </div>
                 </div>
-
                 {/* ---------------- Right: QA dashboard ---------------- */}
                 <div className='rounded-[1.75rem] border border-cyan-400/15 bg-slate-900/40 p-4 shadow-2xl shadow-cyan-950/40 backdrop-blur-sm md:p-6'>
                     {/* Header */}

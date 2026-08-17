@@ -1,0 +1,83 @@
+  <div className='relative xl:self-stretch'>
+                    {/* Dashed curve is xl-only — it needs the tall narrow column to make sense */}
+                    <svg
+                        className='absolute inset-0 hidden h-full w-full xl:block'
+                        viewBox='0 0 190 620'
+                        preserveAspectRatio='none'
+                        aria-hidden='true'>
+                        <path
+                            id='qaFlowPath'
+                            d='M118 40 C 30 130, 190 190, 96 300 C 10 400, 165 470, 92 600'
+                            fill='none'
+                            stroke='rgba(34,211,238,0.35)'
+                            strokeWidth='2'
+                            strokeDasharray='5 9'
+                            strokeLinecap='round'>
+                            <animate
+                                attributeName='stroke-dashoffset'
+                                from='14'
+                                to='0'
+                                dur='1.2s'
+                                repeatCount='indefinite'
+                            />
+                        </path>
+
+                        {/* পথ ধরে ছুটে চলা পালস */}
+                        <circle
+                            r='4'
+                            fill='rgb(34,211,238)'>
+                            <animateMotion
+                                dur='5s'
+                                repeatCount='indefinite'>
+                                <mpath href='#qaFlowPath' />
+                            </animateMotion>
+                            <animate
+                                attributeName='opacity'
+                                values='0;1;1;0'
+                                keyTimes='0;0.08;0.92;1'
+                                dur='5s'
+                                repeatCount='indefinite'
+                            />
+                        </circle>
+
+                        {/* দ্বিতীয় পালস, একটু দেরিতে শুরু */}
+                        <circle
+                            r='2.5'
+                            fill='rgba(34,211,238,0.6)'>
+                            <animateMotion
+                                dur='5s'
+                                begin='2.5s'
+                                repeatCount='indefinite'>
+                                <mpath href='#qaFlowPath' />
+                            </animateMotion>
+                            <animate
+                                attributeName='opacity'
+                                values='0;1;1;0'
+                                keyTimes='0;0.08;0.92;1'
+                                dur='5s'
+                                begin='2.5s'
+                                repeatCount='indefinite'
+                            />
+                        </circle>
+                    </svg>
+
+                    <div className='relative grid grid-cols-2 gap-3 sm:grid-cols-4 xl:flex xl:h-full xl:flex-col xl:justify-between xl:gap-0 xl:py-2'>
+                        {heroChecks.slice(0, 4).map((check, i) => (
+                            <div
+                                key={check.title}
+                                className={`rounded-2xl border border-cyan-400/15 bg-slate-900/80 px-4 py-3 shadow-lg shadow-cyan-950/40 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/35 xl:w-fit ${i % 2 === 0 ? 'xl:translate-x-6' : ''}`}>
+                                <div className='flex items-center gap-3'>
+                                    <CheckCircle2
+                                        size={20}
+                                        className='shrink-0 text-cyan-300'
+                                    />
+
+                                    <div className='leading-tight'>
+                                        <p className='text-sm font-semibold text-white'>{check.title}</p>
+                                        <p className='mt-0.5 text-xs text-slate-400'>{check.subtitle}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>

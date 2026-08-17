@@ -6,20 +6,61 @@ export const portfolio = {
     location: 'Dhaka, Bangladesh',
     email: 'iubat.jahid@gmail.com',
     phone: '+880 1643-848170',
-    resumeUrl: '/Jahid_Hasan_CV.pdf',
+    resumeUrl: 'https://tinyurl.com/jahids-cv',
     github: 'https://github.com/#',
     linkedin: 'https://www.linkedin.com/in/jahid-hasan-sumon/',
-    availability: 'Available for SQA / QA Automation roles',
+
+    // --- Hero ---
+    availability: 'Available for QA / SQA Opportunities',
+    heroQuote: "Quality is not an act, it's a habit.",
     heroTagline:
         'Experienced in designing scalable QA workflows, executing regression and cross-browser testing, and delivering clear, evidence-based quality reports that support confident product releases and improved user experience.',
+
     summary:
         'Software Quality Assurance Engineer with hands-on experience across manual and automated testing for React, Next.js, SaaS, telecom, e-commerce, ticketing, and CMS-driven web platforms. Strong in test planning, defect lifecycle management, API testing, regression testing, and reusable QA process design.',
+
+    // Hero stat bar. icon keys map to lucide icons inside StatGrid.jsx
     stats: [
+        { value: '5+', label: 'Projects Delivered', icon: 'projects' },
+        { value: '3+', label: 'Years Experience', icon: 'experience' },
+        { value: '10+', label: 'QA Tools & Technologies', icon: 'tools' },
+    ],
+    sidebarStats: [
         { label: 'Primary Focus', value: 'Web QA' },
         { label: 'Automation', value: 'Playwright' },
         { label: 'Project Types', value: '5+' },
         { label: 'Career Path', value: 'QA Lead' },
     ],
+
+    // Hero dashboard progress rows. icon keys: manual | automation | api | regression
+    coreStrengths: [
+        { name: 'Manual Testing', level: 90, icon: 'manual' },
+        { name: 'Automation Testing', level: 80, icon: 'automation' },
+        { name: 'API Testing', level: 85, icon: 'api' },
+        { name: 'Regression Testing', level: 90, icon: 'regression' },
+    ],
+
+    // Hero tool chips. Drop the SVGs in /public/logos/ — omit `logo` for a lucide fallback
+    testingTools: [
+        { name: 'Playwright', logo: '/logos/playwright.svg' },
+        { name: 'Postman', logo: '/logos/postman-icon.svg' },
+        { name: 'Chrome DevTools', logo: '/logos/chrome-dev.svg' },
+    ],
+
+    // Floating cards along the dashed connector
+    heroChecks: [
+        { title: 'Test Passed', subtitle: 'All systems' },
+        { title: 'API Validated', subtitle: '200 OK' },
+        { title: 'Regression Complete', subtitle: 'No critical bugs' },
+        { title: 'Automation Ready', subtitle: 'Tests running' },
+    ],
+
+    // Two cards at the bottom of the dashboard. icon keys: monitor | folder | tools | calendar | projects
+    heroHighlights: [
+        { title: 'Web QA', subtitle: 'Primary Focus', icon: 'monitor' },
+        { title: '5+ Projects', subtitle: 'Completed', icon: 'folder' },
+    ],
+
     competencies: [
         'Manual & Functional Testing',
         'Test Case Design & Execution',

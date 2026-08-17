@@ -1,82 +1,272 @@
-import { Download } from 'lucide-react';
+import { ArrowRight, Calendar, CheckCircle2, ClipboardCheck, Code2, Download, FolderCheck, FolderKanban, Monitor, RefreshCw, Settings, ShieldCheck, Users, Wrench } from 'lucide-react';
 import Container from '../common/Container';
 import StatGrid from '../common/StatGrid';
 import { portfolio } from '../../data/portfolioData';
 
+/* Icon registry: data files stay plain JSON-ish, icons resolve here by key */
+const STRENGTH_ICONS = {
+    manual: ClipboardCheck,
+    automation: Settings,
+    api: Code2,
+    regression: RefreshCw,
+};
+
+const HIGHLIGHT_ICONS = {
+    monitor: Monitor,
+    folder: FolderCheck,
+    tools: Wrench,
+    calendar: Calendar,
+    projects: FolderKanban,
+};
+
+/* Fallbacks so the section renders correctly even before portfolioData.js is updated */
+const FALLBACK_STRENGTHS = [
+    { name: 'Manual Testing', level: 90, icon: 'manual' },
+    { name: 'Automation Testing', level: 80, icon: 'automation' },
+    { name: 'API Testing', level: 85, icon: 'api' },
+    { name: 'Regression Testing', level: 90, icon: 'regression' },
+];
+
+const FALLBACK_TOOLS = [{ name: 'Playwright' }, { name: 'Postman' }, { name: 'Chrome DevTools' }];
+
+const FALLBACK_CHECKS = [
+    { title: 'Test Passed', subtitle: 'All systems' },
+    { title: 'API Validated', subtitle: '200 OK' },
+    { title: 'Regression Complete', subtitle: 'No critical bugs' },
+    { title: 'Automation Ready', subtitle: 'Tests running' },
+];
+
+const FALLBACK_HIGHLIGHTS = [
+    { title: 'Web QA', subtitle: 'Primary Focus', icon: 'monitor' },
+    { title: '5+ Projects', subtitle: 'Completed', icon: 'folder' },
+];
+
 export default function HeroSection() {
+    const coreStrengths = portfolio.coreStrengths?.length ? portfolio.coreStrengths : FALLBACK_STRENGTHS;
+    const testingTools = portfolio.testingTools?.length ? portfolio.testingTools : FALLBACK_TOOLS;
+    const heroChecks = portfolio.heroChecks?.length ? portfolio.heroChecks : FALLBACK_CHECKS;
+    const heroHighlights = portfolio.heroHighlights?.length ? portfolio.heroHighlights : FALLBACK_HIGHLIGHTS;
+
     return (
         <section
             id='home'
-            className='relative overflow-hidden py-24 md:py-32'>
-            <div className='absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.18),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.16),transparent_35%)]' />
-            <Container className='grid items-center gap-12 md:grid-cols-[1.2fr_0.8fr]'>
+            className='relative overflow-hidden bg-slate-950 py-14 md:py-20 lg:py-24'>
+            {/* Ambient glow */}
+            <div className='pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_18%,rgba(34,211,238,0.14),transparent_45%),radial-gradient(circle_at_10%_85%,rgba(59,130,246,0.12),transparent_45%)]' />
+
+            {/* Circuit-style grid fading in from the bottom */}
+            <div className='pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-80 bg-[linear-gradient(to_right,rgba(34,211,238,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.07)_1px,transparent_1px)] bg-[size:46px_46px] [mask-image:linear-gradient(to_top,black,transparent_85%)]' />
+
+            <Container className='grid items-center gap-12 lg:grid-cols-2 xl:grid-cols-[1fr_190px_1.05fr] xl:gap-8'>
+                {/* ---------------- Left: intro ---------------- */}
                 <div>
-                    <p className='mb-4 inline-flex rounded-full border border-cyan-400/30 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-200'>{portfolio.availability}</p>
-                    <h1 className='text-3xl font-black leading-tight text-white sm:text-4xl md:text-5xl lg:text-7xl'>
-                        {portfolio.name}
-                        <span className='block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent'>{portfolio.role}</span>
+                    <p className='mb-6 inline-flex items-center gap-2.5 rounded-xl border border-cyan-400/25 bg-cyan-400/[0.07] px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-cyan-300'>
+                        <span className='relative flex h-2 w-2'>
+                            <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70' />
+                            <span className='relative inline-flex h-2 w-2 rounded-full bg-emerald-400' />
+                        </span>
+                        {portfolio.availability}
+                    </p>
+
+                    <h1 className='text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl xl:text-[3.25rem]'>
+                        <span className='block text-white'>{portfolio.name}</span>
+
+                        <span className='mt-3 block bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>{portfolio.role}</span>
                     </h1>
-                    <p className='mt-6 max-w-2xl text-lg leading-8 text-slate-300 text-justify'>{portfolio.heroTagline}</p>
+
+                    <p className='mt-6 max-w-xl text-base leading-8 text-slate-400'>{portfolio.heroTagline}</p>
+
+                    {/* CTAs */}
                     <div className='mt-8 flex flex-wrap gap-4'>
                         <a
                             href='#contact'
-                            className='rounded-2xl bg-cyan-400 px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-cyan-400/20 transition hover:bg-cyan-300'>
-                            Contact Me
+                            className='group inline-flex items-center gap-2.5 rounded-xl bg-cyan-400 px-6 py-3.5 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-300 hover:shadow-cyan-400/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300'>
+                            <Users size={18} />
+                            Let's Work Together
+                            <ArrowRight
+                                size={18}
+                                className='transition-transform duration-300 group-hover:translate-x-1'
+                            />
                         </a>
+
                         <a
                             href={portfolio.resumeUrl}
-                            className='inline-flex items-center gap-2 rounded-2xl border border-white/10 px-6 py-3 font-semibold text-white transition hover:bg-white/10'>
-                            <Download size={18} /> Download CV
+                            download
+                            className='inline-flex items-center gap-2.5 rounded-xl border border-white/15 px-6 py-3.5 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300'>
+                            <Download size={18} />
+                            Download CV
                         </a>
+                    </div>
+
+                    {/* Stats bar */}
+                    <StatGrid
+                        stats={portfolio.stats}
+                        variant='bar'
+                        className='mt-10'
+                    />
+                </div>
+
+                {/* ---------------- Middle: dashed connector ---------------- */}
+                <div className='relative hidden xl:block'>
+                    <svg
+                        className='absolute inset-0 h-full w-full'
+                        viewBox='0 0 190 620'
+                        preserveAspectRatio='none'
+                        aria-hidden='true'>
+                        <path
+                            d='M118 40 C 30 130, 190 190, 96 300 C 10 400, 165 470, 92 600'
+                            fill='none'
+                            stroke='rgba(34,211,238,0.35)'
+                            strokeWidth='2'
+                            strokeDasharray='5 9'
+                            strokeLinecap='round'
+                        />
+                        <circle
+                            cx='150'
+                            cy='215'
+                            r='3.5'
+                            fill='rgba(34,211,238,0.55)'
+                        />
+                        <circle
+                            cx='40'
+                            cy='390'
+                            r='3.5'
+                            fill='rgba(34,211,238,0.55)'
+                        />
+                        <circle
+                            cx='130'
+                            cy='595'
+                            r='3.5'
+                            fill='rgba(34,211,238,0.55)'
+                        />
+                    </svg>
+
+                    <div className='relative flex flex-col gap-10 py-4'>
+                        {heroChecks.slice(0, 4).map((check, i) => (
+                            <div
+                                key={check.title}
+                                className={`w-fit rounded-2xl border border-cyan-400/15 bg-slate-900/80 px-4 py-3 shadow-lg shadow-cyan-950/40 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/35 ${i % 2 === 0 ? 'translate-x-6' : 'translate-x-0'}`}>
+                                <div className='flex items-center gap-3'>
+                                    <CheckCircle2
+                                        size={20}
+                                        className='shrink-0 text-cyan-300'
+                                    />
+
+                                    <div className='leading-tight'>
+                                        <p className='text-sm font-semibold text-white'>{check.title}</p>
+                                        <p className='mt-0.5 text-xs text-slate-400'>{check.subtitle}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                <div className='rounded-[2rem] border border-white/10 bg-white/[0.04] p-4 md:p-6 shadow-2xl shadow-cyan-950/40'>
-                    <div className='rounded-[1.5rem] bg-slate-900 p-3 md:p-6'>
-                        <div className='group mb-6 flex h-28 items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-br from-cyan-400 to-blue-600'>
-                            <div className='relative flex items-center justify-center'>
-                                <svg
-                                    width='120'
-                                    height='70'
-                                    viewBox='0 0 120 70'
-                                    className='overflow-visible'>
-                                    {/* Arc */}
-                                    <path
-                                        d='M10 60 A50 50 0 0 1 110 60'
-                                        fill='none'
-                                        stroke='rgba(255,255,255,0.35)'
-                                        strokeWidth='8'
-                                        strokeLinecap='round'
-                                    />
+                {/* ---------------- Right: QA dashboard ---------------- */}
+                <div className='rounded-[1.75rem] border border-cyan-400/15 bg-slate-900/40 p-4 shadow-2xl shadow-cyan-950/40 backdrop-blur-sm md:p-6'>
+                    {/* Header */}
+                    <div className='flex items-start justify-between gap-4'>
+                        <div className='flex items-center gap-4'>
+                            <span className='flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-cyan-400/25 bg-cyan-400/10'>
+                                <ShieldCheck
+                                    size={26}
+                                    className='text-cyan-300'
+                                />
+                            </span>
 
-                                    {/* Needle */}
-                                    <line
-                                        x1='60'
-                                        y1='60'
-                                        x2='10'
-                                        y2='60'
-                                        stroke='white'
-                                        strokeWidth='4'
-                                        strokeLinecap='round'
-                                        className='origin-[60px_60px] transition-transform duration-2500 ease-out group-hover:rotate-[180deg]'
-                                    />
-
-                                    {/* Center Dot */}
-                                    <circle
-                                        cx='60'
-                                        cy='60'
-                                        r='6'
-                                        fill='white'
-                                    />
-                                </svg>
+                            <div>
+                                <h2 className='text-xl font-bold uppercase tracking-[0.06em] text-white md:text-2xl'>QA Engineering</h2>
+                                <p className='mt-1 text-sm text-slate-400'>{portfolio.heroQuote || "Quality is not an act, it's a habit."}</p>
                             </div>
                         </div>
 
-                        <h3 className='text-2xl font-bold text-white'>QA Profile</h3>
-                        <p className='mt-3 text-slate-300 text-justify'>{portfolio.summary}</p>
-                        <div className='mt-6'>
-                            <StatGrid stats={portfolio.stats} />
+                        <div className='flex shrink-0 gap-1.5 pt-2'>
+                            <span className='h-1.5 w-1.5 rounded-full bg-slate-600' />
+                            <span className='h-1.5 w-1.5 rounded-full bg-slate-600' />
+                            <span className='h-1.5 w-1.5 rounded-full bg-slate-600' />
                         </div>
+                    </div>
+
+                    {/* Panel: strengths + tools */}
+                    <div className='mt-6 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 md:p-6'>
+                        <h3 className='text-xs font-semibold uppercase tracking-[0.14em] text-cyan-300'>Core Strengths</h3>
+
+                        <div className='mt-5 space-y-5'>
+                            {coreStrengths.map((item) => {
+                                const Icon = STRENGTH_ICONS[item.icon] || ClipboardCheck;
+
+                                return (
+                                    <div
+                                        key={item.name}
+                                        className='group flex items-center gap-4'>
+                                        <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-slate-800/60 text-cyan-300'>
+                                            <Icon size={18} />
+                                        </span>
+
+                                        <div className='min-w-0 flex-1'>
+                                            <div className='mb-2 flex items-baseline justify-between gap-3'>
+                                                <span className='truncate text-sm font-medium text-slate-100'>{item.name}</span>
+                                                <span className='shrink-0 text-sm font-semibold text-slate-300'>{item.level}%</span>
+                                            </div>
+
+                                            <div className='h-1.5 overflow-hidden rounded-full bg-white/[0.08]'>
+                                                <div
+                                                    style={{ width: `${item.level}%` }}
+                                                    className='h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-[width] duration-700'
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* Tools */}
+                        <h3 className='mt-7 text-xs font-semibold uppercase tracking-[0.14em] text-cyan-300'>Tools &amp; Technologies</h3>
+
+                        <div className='mt-4 flex flex-wrap gap-3'>
+                            {testingTools.slice(0, 3).map((tool) => (
+                                <div
+                                    key={tool.name}
+                                    className='flex items-center gap-2.5 rounded-xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-slate-100 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/30 hover:text-cyan-200'>
+                                    {tool.logo ? (
+                                        <img
+                                            src={tool.logo}
+                                            alt=''
+                                            className='h-5 w-5 shrink-0 object-contain'
+                                        />
+                                    ) : (
+                                        <Code2
+                                            size={18}
+                                            className='shrink-0 text-cyan-300'
+                                        />
+                                    )}
+                                    {tool.name}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Highlight cards */}
+                    <div className='mt-5 grid gap-4 sm:grid-cols-2'>
+                        {heroHighlights.slice(0, 2).map((card) => {
+                            const Icon = HIGHLIGHT_ICONS[card.icon] || Monitor;
+
+                            return (
+                                <div
+                                    key={card.title}
+                                    className='flex items-center gap-3.5 rounded-2xl border border-white/[0.07] bg-white/[0.03] p-4 transition-all duration-300 hover:border-cyan-300/25'>
+                                    <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-slate-800/60 text-cyan-300'>
+                                        <Icon size={20} />
+                                    </span>
+
+                                    <div className='leading-tight'>
+                                        <p className='text-base font-bold text-white'>{card.title}</p>
+                                        <p className='mt-1 text-xs text-slate-400'>{card.subtitle}</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </Container>

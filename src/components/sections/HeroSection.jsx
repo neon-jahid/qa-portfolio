@@ -2,6 +2,7 @@ import { ArrowRight, Calendar, CheckCircle2, ClipboardCheck, Code2, Download, Fo
 import Container from '../common/Container';
 import StatGrid from '../common/StatGrid';
 import { portfolio } from '../../data/portfolioData';
+import { useEffect, useRef, useState } from 'react';
 
 const STRENGTH_ICONS = {
     manual: ClipboardCheck,
@@ -44,6 +45,33 @@ export default function HeroSection() {
     const testingTools = portfolio.testingTools?.length ? portfolio.testingTools : FALLBACK_TOOLS;
     const heroChecks = portfolio.heroChecks?.length ? portfolio.heroChecks : FALLBACK_CHECKS;
     const heroHighlights = portfolio.heroHighlights?.length ? portfolio.heroHighlights : FALLBACK_HIGHLIGHTS;
+
+    const strengthsRef = useRef(null);
+    const [barsVisible, setBarsVisible] = useState(false);
+
+    useEffect(() => {
+        const node = strengthsRef.current;
+        if (!node) return;
+
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduced) {
+            setBarsVisible(true);
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setBarsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.35 },
+        );
+
+        observer.observe(node);
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <section
@@ -202,18 +230,21 @@ export default function HeroSection() {
                     </div>
 
                     {/* Panel: strengths + tools */}
-                    <div className='mt-6 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 md:p-6'>
+                    {/* Panel: strengths + tools */}
+                    <div
+                        ref={strengthsRef}
+                        className='mt-6 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 md:p-6'>
                         <h3 className='text-xs font-semibold uppercase tracking-[0.14em] text-cyan-300'>Core Strengths</h3>
 
                         <div className='mt-5 space-y-5'>
-                            {coreStrengths.map((item) => {
+                            {coreStrengths.map((item, i) => {
                                 const Icon = STRENGTH_ICONS[item.icon] || ClipboardCheck;
 
                                 return (
                                     <div
                                         key={item.name}
                                         className='group flex items-center gap-4'>
-                                        <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-slate-800/60 text-cyan-300'>
+                                        <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-slate-800/60 text-cyan-300 transition-colors duration-300 group-hover:border-cyan-300/30 group-hover:text-cyan-200'>
                                             <Icon size={18} />
                                         </span>
 
@@ -225,9 +256,13 @@ export default function HeroSection() {
 
                                             <div className='h-1.5 overflow-hidden rounded-full bg-white/[0.08]'>
                                                 <div
-                                                    style={{ width: `${item.level}%` }}
-                                                    className='h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-[width] duration-700'
-                                                />
+                                                    style={{
+                                                        width: barsVisible ? `${item.level}%` : '0%',
+                                                        transitionDelay: `${i * 140}ms`,
+                                                    }}
+                                                    className='relative h-full overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-[width] duration-[1100ms] ease-out'>
+                                                    <span className='absolute inset-0 animate-[bar-shimmer_2.4s_ease-in-out_infinite] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent)]' />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -52,3 +52,18 @@ body {
         animation: none;
     }
 }
+@keyframes bar-shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    60%,
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-\[bar-shimmer_2\.4s_ease-in-out_infinite\] {
+        animation: none;
+    }
+}

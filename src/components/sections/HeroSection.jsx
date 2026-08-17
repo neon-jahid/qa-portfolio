@@ -3,7 +3,6 @@ import Container from '../common/Container';
 import StatGrid from '../common/StatGrid';
 import { portfolio } from '../../data/portfolioData';
 
-/* Icon registry: data files stay plain JSON-ish, icons resolve here by key */
 const STRENGTH_ICONS = {
     manual: ClipboardCheck,
     automation: Settings,
@@ -19,7 +18,6 @@ const HIGHLIGHT_ICONS = {
     projects: FolderKanban,
 };
 
-/* Fallbacks so the section renders correctly even before portfolioData.js is updated */
 const FALLBACK_STRENGTHS = [
     { name: 'Manual Testing', level: 90, icon: 'manual' },
     { name: 'Automation Testing', level: 80, icon: 'automation' },
@@ -57,7 +55,7 @@ export default function HeroSection() {
             {/* Circuit-style grid fading in from the bottom */}
             <div className='pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-80 bg-[linear-gradient(to_right,rgba(34,211,238,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.07)_1px,transparent_1px)] bg-[size:46px_46px] [mask-image:linear-gradient(to_top,black,transparent_85%)]' />
 
-            <Container className='grid items-center gap-12 lg:grid-cols-2 xl:grid-cols-[1fr_190px_1.05fr] xl:gap-8'>
+            <Container className='grid items-center gap-12 xl:grid-cols-[1fr_190px_1.05fr] xl:gap-8'>
                 {/* ---------------- Left: intro ---------------- */}
                 <div>
                     <p className='mb-6 inline-flex items-center gap-2.5 rounded-xl border border-cyan-400/25 bg-cyan-400/[0.07] px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-cyan-300'>
@@ -68,7 +66,7 @@ export default function HeroSection() {
                         {portfolio.availability}
                     </p>
 
-                    <h1 className='text-5xl font-black leading-[1.02] tracking-tight sm:text-6xl xl:text-[3.25rem]'>
+                    <h1 className='text-4xl font-black leading-[1.05] tracking-tight sm:text-4xl md:text-5xl xl:text-[3rem]'>
                         <span className='block text-white'>{portfolio.name}</span>
 
                         <span className='mt-3 block bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>{portfolio.role}</span>
@@ -91,7 +89,8 @@ export default function HeroSection() {
 
                         <a
                             href={portfolio.resumeUrl}
-                            download
+                            target='_blank'
+                            rel='noopener noreferrer'
                             className='inline-flex items-center gap-2.5 rounded-xl border border-white/15 px-6 py-3.5 font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/40 hover:bg-white/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300'>
                             <Download size={18} />
                             Download CV
@@ -106,46 +105,77 @@ export default function HeroSection() {
                     />
                 </div>
 
-                {/* ---------------- Middle: dashed connector ---------------- */}
-                <div className='relative hidden xl:block'>
+                {/* ---------------- Middle: QA checks ----------------
+                    Mobile / tablet : 2-column grid of compact cards
+                    xl and up       : vertical column following a dashed curve  */}
+                <div className='relative xl:self-stretch'>
+                    {/* Dashed curve is xl-only — it needs the tall narrow column to make sense */}
                     <svg
-                        className='absolute inset-0 h-full w-full'
+                        className='absolute inset-0 hidden h-full w-full xl:block'
                         viewBox='0 0 190 620'
                         preserveAspectRatio='none'
                         aria-hidden='true'>
                         <path
+                            id='qaFlowPath'
                             d='M118 40 C 30 130, 190 190, 96 300 C 10 400, 165 470, 92 600'
                             fill='none'
                             stroke='rgba(34,211,238,0.35)'
                             strokeWidth='2'
                             strokeDasharray='5 9'
-                            strokeLinecap='round'
-                        />
+                            strokeLinecap='round'>
+                            <animate
+                                attributeName='stroke-dashoffset'
+                                from='14'
+                                to='0'
+                                dur='1.2s'
+                                repeatCount='indefinite'
+                            />
+                        </path>
+
+                        {/* পথ ধরে ছুটে চলা পালস */}
                         <circle
-                            cx='150'
-                            cy='215'
-                            r='3.5'
-                            fill='rgba(34,211,238,0.55)'
-                        />
+                            r='4'
+                            fill='rgb(34,211,238)'>
+                            <animateMotion
+                                dur='5s'
+                                repeatCount='indefinite'>
+                                <mpath href='#qaFlowPath' />
+                            </animateMotion>
+                            <animate
+                                attributeName='opacity'
+                                values='0;1;1;0'
+                                keyTimes='0;0.08;0.92;1'
+                                dur='5s'
+                                repeatCount='indefinite'
+                            />
+                        </circle>
+
+                        {/* দ্বিতীয় পালস, একটু দেরিতে শুরু */}
                         <circle
-                            cx='40'
-                            cy='390'
-                            r='3.5'
-                            fill='rgba(34,211,238,0.55)'
-                        />
-                        <circle
-                            cx='130'
-                            cy='595'
-                            r='3.5'
-                            fill='rgba(34,211,238,0.55)'
-                        />
+                            r='2.5'
+                            fill='rgba(34,211,238,0.6)'>
+                            <animateMotion
+                                dur='5s'
+                                begin='2.5s'
+                                repeatCount='indefinite'>
+                                <mpath href='#qaFlowPath' />
+                            </animateMotion>
+                            <animate
+                                attributeName='opacity'
+                                values='0;1;1;0'
+                                keyTimes='0;0.08;0.92;1'
+                                dur='5s'
+                                begin='2.5s'
+                                repeatCount='indefinite'
+                            />
+                        </circle>
                     </svg>
 
-                    <div className='relative flex flex-col gap-10 py-4'>
+                    <div className='relative grid grid-cols-2 gap-3 sm:grid-cols-4 xl:flex xl:h-full xl:flex-col xl:justify-between xl:gap-0 xl:py-2'>
                         {heroChecks.slice(0, 4).map((check, i) => (
                             <div
                                 key={check.title}
-                                className={`w-fit rounded-2xl border border-cyan-400/15 bg-slate-900/80 px-4 py-3 shadow-lg shadow-cyan-950/40 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/35 ${i % 2 === 0 ? 'translate-x-6' : 'translate-x-0'}`}>
+                                className={`rounded-2xl border border-cyan-400/15 bg-slate-900/80 px-4 py-3 shadow-lg shadow-cyan-950/40 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/35 xl:w-fit ${i % 2 === 0 ? 'xl:translate-x-6' : ''}`}>
                                 <div className='flex items-center gap-3'>
                                     <CheckCircle2
                                         size={20}

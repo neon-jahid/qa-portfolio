@@ -21,7 +21,7 @@ export const portfolio = {
 
     // Hero stat bar. icon keys map to lucide icons inside StatGrid.jsx
     stats: [
-        { value: '5+', label: 'Projects Delivered', icon: 'projects' },
+        { value: '20+', label: 'Projects Delivered', icon: 'projects' },
         { value: '3+', label: 'Years Experience', icon: 'experience' },
         { value: '10+', label: 'QA Tools & Technologies', icon: 'tools' },
     ],

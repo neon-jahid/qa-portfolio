@@ -2,6 +2,7 @@ import {
     Bot,
     Bug,
     Check,
+    CheckCircle2,
     ClipboardCheck,
     ClipboardList,
     Code2,
@@ -70,12 +71,13 @@ export const portfolio = {
         { name: 'DevTools', logo: '/logos/chrome-dev.svg' },
     ],
 
-    // Cards along the QA connector. Keep this at 4 — the xl curved path is drawn for four nodes
+    // Cards along the QA connector. Keep this at 4 — the xl curved path is drawn for four nodes.
+    // `tone` maps to a colour set in HeroSection.jsx (pass | api | regression | automation)
     heroChecks: [
-        { title: 'Test Passed', subtitle: 'All systems' },
-        { title: 'API Validated', subtitle: '200 OK' },
-        { title: 'Regression Complete', subtitle: 'No critical bugs' },
-        { title: 'Automation Ready', subtitle: 'Tests running' },
+        { title: 'Test Passed', subtitle: 'All systems', icon: CheckCircle2, tone: 'pass' },
+        { title: 'API Validated', subtitle: '200 OK', icon: Webhook, tone: 'api' },
+        { title: 'Regression Complete', subtitle: 'No critical bugs', icon: RefreshCw, tone: 'regression' },
+        { title: 'Automation Ready', subtitle: 'Tests running', icon: Bot, tone: 'automation' },
     ],
 
     // "What I Do Best" master/detail list. Numbering (01, 02, …) comes from array order.

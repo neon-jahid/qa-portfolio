@@ -38,7 +38,6 @@
     --color-body: #334155;
     --color-muted: #475569;
     --color-faint: #5b6a7d;
-    --color-dot: #cbd5e1; /* purely decorative — exempt from text contrast */
 
     /* Accent. `accent` is the text-safe tone; `accent-strong` is darker still,
        used for eyebrows, hovers and the decorative dots/strokes. */
@@ -48,6 +47,13 @@
     --color-accent-line: rgb(8 145 178 / 0.3);
     --color-brand: #0e7490;
     --color-on-brand: #ffffff;
+
+    /* Hero QA checks — one tone per card. Used with /10 and /25 opacity
+       modifiers for the icon tile fill and border. */
+    --color-check-pass: #047857;
+    --color-check-api: #1d4ed8;
+    --color-check-regression: #6d28d9;
+    --color-check-automation: #b45309;
 
     /* Editor panel — VS Code "Light+" flavoured, tuned for contrast on --color-code */
     --color-chrome: rgb(15 23 42 / 0.05);
@@ -101,7 +107,6 @@
     --color-body: #cbd5e1;
     --color-muted: #94a3b8;
     --color-faint: #8193a8;
-    --color-dot: #475569;
 
     --color-accent: #67e8f9;
     --color-accent-strong: #22d3ee;
@@ -109,6 +114,11 @@
     --color-accent-line: rgb(34 211 238 / 0.25);
     --color-brand: #22d3ee;
     --color-on-brand: #020617;
+
+    --color-check-pass: #34d399;
+    --color-check-api: #60a5fa;
+    --color-check-regression: #a78bfa;
+    --color-check-automation: #fbbf24;
 
     /* VS Code "Dark+" flavoured */
     --color-chrome: rgb(255 255 255 / 0.04);

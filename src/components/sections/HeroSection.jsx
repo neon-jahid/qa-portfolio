@@ -1,8 +1,36 @@
-import { ArrowRight, CheckCircle2, Code2, Download, ShieldCheck, Users } from 'lucide-react';
+import { ArrowRight, Code2, Download, ShieldCheck, Users } from 'lucide-react';
 import Container from '../common/Container';
 import StatGrid from '../common/StatGrid';
 import { portfolio } from '../../data/portfolioData';
 import { useEffect, useRef, useState } from 'react';
+
+/**
+ * One colour per QA check card. Class strings are written out in full — Tailwind
+ * scans source text, so `bg-check-${tone}` would never be generated.
+ * `cssVar` re-tints the node-pulse halo to match its card.
+ */
+const CHECK_TONES = {
+    pass: {
+        tile: 'border-check-pass/25 bg-check-pass/10 text-check-pass',
+        node: 'bg-check-pass ring-check-pass/20',
+        cssVar: '--color-check-pass',
+    },
+    api: {
+        tile: 'border-check-api/25 bg-check-api/10 text-check-api',
+        node: 'bg-check-api ring-check-api/20',
+        cssVar: '--color-check-api',
+    },
+    regression: {
+        tile: 'border-check-regression/25 bg-check-regression/10 text-check-regression',
+        node: 'bg-check-regression ring-check-regression/20',
+        cssVar: '--color-check-regression',
+    },
+    automation: {
+        tile: 'border-check-automation/25 bg-check-automation/10 text-check-automation',
+        node: 'bg-check-automation ring-check-automation/20',
+        cssVar: '--color-check-automation',
+    },
+};
 
 export default function HeroSection() {
     const { availability, name, role, heroTagline, resumeUrl, stats, heroQuote, heroDashboard, coreStrengths, testingTools, heroChecks } = portfolio;
@@ -41,9 +69,11 @@ export default function HeroSection() {
             {/* Circuit-style grid fading in from the bottom */}
             <div className='pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-80 bg-[linear-gradient(to_right,var(--color-grid)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-grid)_1px,transparent_1px)] bg-[size:46px_46px] [mask-image:linear-gradient(to_top,black,transparent_85%)]' />
 
-            <Container className='grid grid-cols-1 items-center gap-10 md:gap-12 xl:grid-cols-[1fr_190px_1.05fr] xl:gap-8'>
+            {/* xl:items-stretch — with items-center each column sized to its own
+                content, so the intro and dashboard ended up different heights */}
+            <Container className='grid grid-cols-1 gap-10 md:gap-12 xl:grid-cols-[1fr_190px_1.05fr] xl:items-stretch xl:gap-8'>
                 {/* ---------------- Left: intro ---------------- */}
-                <div>
+                <div className='xl:flex xl:flex-col xl:justify-center'>
                     <p className='mb-6 inline-flex items-center gap-2.5 rounded-xl border border-accent-line bg-accent-tint px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-accent'>
                         <span className='relative flex h-2 w-2'>
                             <span className='absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-70 dark:bg-emerald-400' />
@@ -55,7 +85,11 @@ export default function HeroSection() {
                     <h1 className='text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl md:text-5xl xl:text-[3rem]'>
                         <span className='block text-heading'>{name}</span>
 
-                        <span className='mt-3 block bg-gradient-to-r from-cyan-700 via-cyan-600 to-blue-700 bg-clip-text text-transparent dark:from-cyan-300 dark:via-cyan-400 dark:to-blue-500'>{role}</span>
+                        {/* pb-2 keeps descenders (g, y, q) inside the padding box — bg-clip-text
+                            paints the gradient there, so a tight leading clips them otherwise */}
+                        <span className='mt-3 block bg-gradient-to-r from-cyan-700 via-cyan-600 to-blue-700 bg-clip-text pb-2 text-transparent dark:from-cyan-300 dark:via-cyan-400 dark:to-blue-500'>
+                            {role}
+                        </span>
                     </h1>
 
                     <p className='mt-6 max-w-xl text-sm leading-7 text-muted sm:text-base sm:leading-8'>{heroTagline}</p>
@@ -143,55 +177,58 @@ export default function HeroSection() {
                     </svg>
 
                     <div className='relative flex flex-col gap-4 pl-10 sm:pl-12 xl:h-full xl:justify-between xl:gap-0 xl:py-2 xl:pl-0'>
-                        {heroChecks.map((check, i) => (
-                            <div
-                                key={check.title}
-                                className={`relative rounded-2xl border border-accent-line bg-raised px-4 py-3 shadow-lg shadow-accent-tint backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-strong/40 xl:w-fit ${i % 2 === 0 ? 'xl:translate-x-6' : ''}`}>
-                                {/* রেলের উপরের নোড */}
-                                <span className='absolute -left-[30px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-accent-strong ring-4 ring-accent-tint sm:-left-[34px] xl:hidden'>
-                                    <span
-                                        style={{ animationDelay: `${i * 400}ms` }}
-                                        className='absolute inset-0 animate-[node-pulse_2.4s_ease-in-out_infinite] rounded-full'
-                                    />
-                                </span>
+                        {heroChecks.map((check, i) => {
+                            const Icon = check.icon;
+                            const tone = CHECK_TONES[check.tone] ?? CHECK_TONES.pass;
 
-                                <div className='flex items-center gap-3'>
-                                    <CheckCircle2
-                                        size={20}
-                                        className='shrink-0 text-accent'
-                                    />
+                            return (
+                                <div
+                                    key={check.title}
+                                    className={`group relative rounded-2xl border border-accent-line bg-raised px-4 py-3 shadow-lg shadow-accent-tint backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-strong/40 xl:w-fit ${
+                                        i % 2 === 0 ? 'xl:translate-x-6' : ''
+                                    }`}>
+                                    {/* রেলের উপরের নোড — কার্ডের রঙ ধরে রাখে */}
+                                    <span className={`absolute -left-[30px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full ring-4 sm:-left-[34px] xl:hidden ${tone.node}`}>
+                                        <span
+                                            style={{
+                                                animationDelay: `${i * 400}ms`,
+                                                '--color-pulse-from': `color-mix(in srgb, var(${tone.cssVar}) 50%, transparent)`,
+                                                '--color-pulse-to': `color-mix(in srgb, var(${tone.cssVar}) 0%, transparent)`,
+                                            }}
+                                            className='absolute inset-0 animate-[node-pulse_2.4s_ease-in-out_infinite] rounded-full'
+                                        />
+                                    </span>
 
-                                    <div className='leading-tight'>
-                                        <p className='text-sm font-semibold text-heading'>{check.title}</p>
-                                        <p className='mt-0.5 text-xs text-muted'>{check.subtitle}</p>
+                                    <div className='flex items-center gap-3'>
+                                        <span
+                                            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 group-hover:scale-110 ${tone.tile}`}>
+                                            <Icon size={18} />
+                                        </span>
+
+                                        <div className='leading-tight'>
+                                            <p className='text-sm font-semibold text-heading'>{check.title}</p>
+                                            <p className='mt-0.5 text-xs text-muted'>{check.subtitle}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
                 {/* ---------------- Right: QA dashboard ---------------- */}
-                <div className='rounded-[1.75rem] border border-accent-line bg-glass p-3 shadow-2xl shadow-accent-tint backdrop-blur-sm sm:p-4 md:p-6'>
+                <div className='rounded-[1.75rem] border border-accent-line bg-glass p-3 shadow-2xl shadow-accent-tint backdrop-blur-sm sm:p-4 md:p-6 xl:flex xl:flex-col xl:justify-center'>
                     {/* Header */}
-                    <div className='flex items-start justify-between gap-4'>
-                        <div className='flex items-center gap-4'>
-                            <span className='flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-accent-line bg-accent-tint'>
-                                <ShieldCheck
-                                    size={26}
-                                    className='text-accent'
-                                />
-                            </span>
+                    <div className='flex items-center gap-4'>
+                        <span className='flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-accent-line bg-accent-tint'>
+                            <ShieldCheck
+                                size={26}
+                                className='text-accent'
+                            />
+                        </span>
 
-                            <div>
-                                <h2 className='text-lg font-bold uppercase tracking-[0.06em] text-heading sm:text-xl md:text-2xl'>{heroDashboard.title}</h2>
-                                <p className='mt-1 text-sm text-muted'>{heroQuote}</p>
-                            </div>
-                        </div>
-
-                        <div className='flex shrink-0 gap-1.5 pt-2'>
-                            <span className='h-1.5 w-1.5 rounded-full bg-dot' />
-                            <span className='h-1.5 w-1.5 rounded-full bg-dot' />
-                            <span className='h-1.5 w-1.5 rounded-full bg-dot' />
+                        <div>
+                            <h2 className='text-lg font-bold uppercase tracking-[0.06em] text-heading sm:text-xl md:text-2xl'>{heroDashboard.title}</h2>
+                            <p className='mt-1 text-sm text-muted'>{heroQuote}</p>
                         </div>
                     </div>
 

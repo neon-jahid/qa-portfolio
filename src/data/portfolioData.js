@@ -1,4 +1,4 @@
-import { FileSpreadsheet, ClipboardCheck, TestTube2, Bug, ShieldCheck, Workflow } from 'lucide-react';
+import { Bug, ClipboardCheck, Code2, FileSpreadsheet, RefreshCw, Settings, ShieldCheck, TestTube2, Workflow } from 'lucide-react';
 
 export const portfolio = {
     name: 'Jahid Hasan',
@@ -25,19 +25,20 @@ export const portfolio = {
         { value: '3+', label: 'Years Experience', icon: 'experience' },
         { value: '10+', label: 'QA Tools & Technologies', icon: 'tools' },
     ],
-    sidebarStats: [
-        { label: 'Primary Focus', value: 'Web QA' },
-        { label: 'Automation', value: 'Playwright' },
-        { label: 'Project Types', value: '5+' },
-        { label: 'Career Path', value: 'QA Lead' },
-    ],
 
-    // Hero dashboard progress rows. icon keys: manual | automation | api | regression
+    // Right-hand dashboard card copy
+    heroDashboard: {
+        title: 'QA Engineering',
+        strengthsTitle: 'Core Strengths',
+        toolsTitle: 'Tools & Technologies',
+    },
+
+    // Hero dashboard progress rows
     coreStrengths: [
-        { name: 'Manual Testing', level: 90, icon: 'manual' },
-        { name: 'Automation Testing', level: 80, icon: 'automation' },
-        { name: 'API Testing', level: 85, icon: 'api' },
-        { name: 'Regression Testing', level: 90, icon: 'regression' },
+        { name: 'Manual Testing', level: 90, icon: ClipboardCheck },
+        { name: 'Automation Testing', level: 80, icon: Settings },
+        { name: 'API Testing', level: 85, icon: Code2 },
+        { name: 'Regression Testing', level: 90, icon: RefreshCw },
     ],
 
     // Hero tool chips. Drop the SVGs in /public/logos/ — omit `logo` for a lucide fallback
@@ -45,20 +46,15 @@ export const portfolio = {
         { name: 'Playwright', logo: '/logos/playwright.svg' },
         { name: 'Postman', logo: '/logos/postman-icon.svg' },
         { name: 'Chrome DevTools', logo: '/logos/chrome-dev.svg' },
+        { name: 'Jira', logo: '/logos/Jira.svg' },
     ],
 
-    // Floating cards along the dashed connector
+    // Cards along the QA connector. Keep this at 4 — the xl curved path is drawn for four nodes
     heroChecks: [
         { title: 'Test Passed', subtitle: 'All systems' },
         { title: 'API Validated', subtitle: '200 OK' },
         { title: 'Regression Complete', subtitle: 'No critical bugs' },
         { title: 'Automation Ready', subtitle: 'Tests running' },
-    ],
-
-    // Two cards at the bottom of the dashboard. icon keys: monitor | folder | tools | calendar | projects
-    heroHighlights: [
-        { title: 'Web QA', subtitle: 'Primary Focus', icon: 'monitor' },
-        { title: '30+ Projects', subtitle: 'Completed', icon: 'folder' },
     ],
 
     competencies: [

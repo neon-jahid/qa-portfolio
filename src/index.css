@@ -59,6 +59,9 @@
     --color-syntax-key: #6f42c1;
     --color-syntax-string: #a31515;
     --color-syntax-punct: #79839a;
+    --color-syntax-num: #0a7040;
+    --color-term-pass: #166534;
+    --color-term-fail: #b91c1c;
 
     /* Decorative: hero rail / connector strokes */
     --color-rail: rgb(8 145 178 / 0.55);
@@ -117,6 +120,9 @@
     --color-syntax-key: #c586c0;
     --color-syntax-string: #ce9178;
     --color-syntax-punct: #5f6f88;
+    --color-syntax-num: #b5cea8;
+    --color-term-pass: #4ade80;
+    --color-term-fail: #f87171;
 
     --color-rail: rgb(34 211 238 / 0.55);
     --color-grid: rgb(34 211 238 / 0.07);
@@ -131,39 +137,6 @@ html {
 body {
     margin: 0;
     background: var(--color-page);
-}
-/* @keyframes speedometer {
-    0% {
-        transform: rotate(-70deg) scale(1);
-    }
-    20% {
-        transform: rotate(25deg) scale(1.05);
-    }
-    45% {
-        transform: rotate(150deg) scale(1.15);
-    }
-    70% {
-        transform: rotate(260deg) scale(1.08);
-    }
-    100% {
-        transform: rotate(360deg) scale(1);
-    }
-} */
-
-@keyframes speed-needle {
-    0% {
-        transform: rotate(-40deg);
-    }
-    50% {
-        transform: rotate(120deg);
-    }
-    100% {
-        transform: rotate(-40deg);
-    }
-}
-
-.animate-speed-needle {
-    animation: speed-needle 1.4s ease-in-out infinite;
 }
 @keyframes qa-flow {
     to {
@@ -213,6 +186,29 @@ body {
     to {
         opacity: 1;
         transform: none;
+    }
+}
+
+/* Terminal lines stagger in while the simulated suite runs */
+@keyframes term-in {
+    from {
+        opacity: 0;
+        transform: translateX(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes caret {
+    0%,
+    49% {
+        opacity: 1;
+    }
+    50%,
+    100% {
+        opacity: 0;
     }
 }
 

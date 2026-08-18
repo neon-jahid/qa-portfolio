@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin } from 'lucide-react';
+import Reveal from '../common/Reveal';
 import { portfolio } from '../../data/portfolioData';
 
 function GitHubIcon({ size = 18 }) {
@@ -30,7 +31,7 @@ export default function ContactSection() {
         <section
             id='contact'
             className='px-4 py-12 sm:px-6 md:py-20'>
-            <div className='mx-auto max-w-4xl rounded-[2rem] border border-line bg-gradient-to-br from-cta-from to-cta-to p-6 text-center sm:p-8 md:p-12'>
+            <Reveal className='mx-auto max-w-4xl rounded-[2rem] border border-line bg-gradient-to-br from-cta-from to-cta-to p-6 text-center sm:p-8 md:p-12'>
                 <p className='mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-accent-strong'>Contact</p>
                 <h2 className='text-2xl font-bold text-heading sm:text-3xl md:text-5xl'>Let’s build reliable products.</h2>
                 <p className='mx-auto mt-4 max-w-2xl text-body'>Open to SQA, QA Automation, and QA process improvement opportunities.</p>
@@ -61,7 +62,7 @@ export default function ContactSection() {
                 <p className='mt-8 inline-flex items-center gap-2 text-muted'>
                     <MapPin size={18} /> {portfolio.location}
                 </p>
-            </div>
+            </Reveal>
         </section>
     );
 }

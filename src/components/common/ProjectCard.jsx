@@ -3,7 +3,7 @@ import Pill from "./Pill";
 
 export default function ProjectCard({ project }) {
   return (
-    <article className="group rounded-3xl border border-line bg-card p-4 transition hover:-translate-y-1 hover:bg-card-hover sm:p-6">
+    <article className="flex h-full flex-col rounded-3xl border border-line bg-card p-4 transition hover:-translate-y-1 hover:bg-card-hover sm:p-6">
       <div className="mb-6 flex items-start justify-between gap-4">
         <ClipboardCheck className="text-accent" size={30} />
         <ExternalLink className="text-faint transition group-hover:text-accent" size={20} />
@@ -16,7 +16,7 @@ export default function ProjectCard({ project }) {
           <Pill key={tag}>{tag}</Pill>
         ))}
       </div>
-      <p className="mt-5 text-sm text-faint">{project.period}</p>
+      <p className="mt-auto pt-5 text-sm text-faint">{project.period}</p>
     </article>
   );
 }

@@ -86,7 +86,6 @@ export default function HeroSection() {
                     {/* Stats bar */}
                     <StatGrid
                         stats={stats}
-                        variant='bar'
                         className='mt-10'
                     />
                 </div>

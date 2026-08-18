@@ -1,9 +1,11 @@
 import {
     Bot,
     Bug,
+    Check,
     ClipboardCheck,
     ClipboardList,
     Code2,
+    Database,
     FileSpreadsheet,
     FileText,
     MonitorSmartphone,
@@ -14,6 +16,7 @@ import {
     TestTube2,
     Webhook,
     Workflow,
+    Wrench,
 } from 'lucide-react';
 
 export const portfolio = {
@@ -176,46 +179,116 @@ export const portfolio = {
             description: 'Standardize QA templates, reporting formats, test IDs, and reusable automation patterns for team efficiency.',
         },
     ],
-    deliverables: [
-        'Test case suites',
-        'Bug reports with evidence',
-        'Regression reports',
-        'Smoke test checklists',
-        'API test notes',
-        'Playwright test scripts',
-        'QA status reports',
-        'Defect summary dashboards',
-        'Release validation notes',
-    ],
-    // Editor-style panel in the Automation section.
-    // `depth` drives the tree guides — the component works out ├─ vs └─ itself.
-    // kind: folder | spec | file
-    automationEditor: {
-        fileName: 'test-structure.txt',
-        comment: '// Sample automation structure',
+    // Interactive "Automation in Practice" panel.
+    // tree: `depth` drives the ├─ / └─ guides; `file` links a node to files[].id
+    // files: `code` is highlighted by the tokenizer in CodeBlock.jsx — plain JS/JSON in, colours out
+    automationSuite: {
+        intro: 'A Playwright suite built on the Page Object Model: locators live in page classes, data lives in fixtures, and specs stay short enough to read as documentation.',
+        structureLabel: 'Project Structure',
+        focusLabel: 'Testing Focus',
+
         tree: [
-            { name: 'tests/', depth: 0, kind: 'folder' },
-            { name: 'auth/', depth: 1, kind: 'folder' },
-            { name: 'login.spec.js', depth: 2, kind: 'spec' },
-            { name: 'pages/', depth: 1, kind: 'folder' },
-            { name: 'LoginPage.js', depth: 2, kind: 'file' },
-            { name: 'fixtures/', depth: 1, kind: 'folder' },
-            { name: 'users.js', depth: 2, kind: 'file' },
-            { name: 'utils/', depth: 1, kind: 'folder' },
-            { name: 'testData.js', depth: 2, kind: 'file' },
+            { name: 'tests', depth: 0, kind: 'folder' },
+            { name: 'e2e', depth: 1, kind: 'folder' },
+            { name: 'login.spec.js', depth: 2, kind: 'spec', file: 'spec' },
+            { name: 'pages', depth: 2, kind: 'folder' },
+            { name: 'login.page.js', depth: 3, kind: 'file', file: 'page' },
+            { name: 'fixtures', depth: 1, kind: 'folder' },
+            { name: 'test-data.json', depth: 2, kind: 'data', file: 'data' },
+            { name: 'utils', depth: 1, kind: 'folder' },
         ],
-        focusLabel: 'Focus:',
-        focus: ['reusable selectors', 'clear assertions', 'stable test data', 'regression-ready scenarios'],
+
+        focus: [
+            { label: 'Reusable POM Locators', icon: Wrench },
+            { label: 'Clear & Assertive Tests', icon: Check },
+            { label: 'Stable & Parameterized Data', icon: Database },
+            { label: 'Regression & CI/CD Ready', icon: RefreshCw },
+        ],
+
+        files: [
+            {
+                id: 'spec',
+                name: 'login.spec.js',
+                path: 'tests/e2e/login.spec.js',
+                lang: 'js',
+                code: `import { test, expect } from '@playwright/test';
+import { LoginPage } from './pages/login.page';
+import users from '../fixtures/test-data.json';
+
+test.describe('Login', () => {
+  test('valid credentials reach the dashboard', async ({ page }) => {
+    const login = new LoginPage(page);
+
+    await login.goto();
+    await login.signIn(users.valid);
+
+    await expect(page).toHaveURL(/dashboard/);
+  });
+
+  test('invalid password shows an error', async ({ page }) => {
+    const login = new LoginPage(page);
+
+    await login.goto();
+    await login.signIn(users.invalid);
+
+    await expect(login.error).toBeVisible();
+  });
+});`,
+            },
+            {
+                id: 'page',
+                name: 'login.page.js',
+                path: 'tests/e2e/pages/login.page.js',
+                lang: 'js',
+                code: `export class LoginPage {
+  constructor(page) {
+    this.page = page;
+    this.email = page.getByLabel('Email');
+    this.password = page.getByLabel('Password');
+    this.submit = page.getByRole('button', { name: 'Sign in' });
+    this.error = page.getByRole('alert');
+  }
+
+  async goto() {
+    await this.page.goto('/login');
+  }
+
+  async signIn({ email, password }) {
+    await this.email.fill(email);
+    await this.password.fill(password);
+    await this.submit.click();
+  }
+}`,
+            },
+            {
+                id: 'data',
+                name: 'test-data.json',
+                path: 'tests/fixtures/test-data.json',
+                lang: 'json',
+                code: `{
+  "valid": {
+    "email": "qa@example.com",
+    "password": "Pa55w0rd!"
+  },
+  "invalid": {
+    "email": "qa@example.com",
+    "password": "wrong-password"
+  }
+}`,
+            },
+        ],
+
+        // Simulated run shown in the terminal. `ok: false` renders in the fail colour.
+        command: 'npx playwright test',
+        run: [
+            { text: 'valid credentials reach the dashboard', time: '1.4s', ok: true },
+            { text: 'invalid password shows an error', time: '1.1s', ok: true },
+            { text: 'empty fields block submission', time: '0.9s', ok: true },
+            { text: 'session persists after reload', time: '1.5s', ok: true },
+        ],
+        summary: { passed: 4, failed: 0, time: '4.9s' },
     },
 
-    automationFocus: [
-        'Playwright automation with JavaScript',
-        'Reusable Page Object Model architecture',
-        'Login, authentication, and form validation scenarios',
-        'Positive, negative, and edge-case automation coverage',
-        'Maintainable selectors and test structure',
-        'Regression-ready automation suites',
-    ],
     experience: [
         {
             company: 'SWT WebGeeks',
@@ -275,7 +348,6 @@ export const navItems = [
     { label: 'Toolkit', href: '#skills' },
     { label: 'Process', href: '#process' },
     { label: 'Automation', href: '#automation' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Projects', href: '#projects' },
+    { label: 'Work', href: '#work' },
     { label: 'Contact', href: '#contact' },
 ];

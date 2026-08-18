@@ -1,4 +1,6 @@
 import { Calendar, FolderKanban, Wrench } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import useInView from '../../hooks/useInView';
 
 const STAT_ICONS = {
     projects: FolderKanban,
@@ -6,53 +8,70 @@ const STAT_ICONS = {
     tools: Wrench,
 };
 
-/**
- * stats: [{ value, label, icon? }]
- *
- * variant:
- *   'cards' (default) — original 2-column card grid. Unchanged from before,
- *                       so existing call sites keep working untouched.
- *   'bar'             — single bordered row with dividers + icon tiles (hero).
- */
-export default function StatGrid({ stats = [], variant = 'cards', className = '' }) {
+const prefersReducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/** Counts 0 → target once `run` flips true. Starts at the value under reduced motion. */
+function useCountUp(target, run) {
+    const [value, setValue] = useState(() => (prefersReducedMotion() ? target : 0));
+
+    useEffect(() => {
+        if (!run || prefersReducedMotion()) return;
+
+        let frame;
+        let started;
+        const DURATION = 1100;
+
+        const tick = (now) => {
+            if (started === undefined) started = now;
+            const p = Math.min(1, (now - started) / DURATION);
+            setValue(Math.round(target * (1 - (1 - p) ** 3))); // easeOutCubic
+            if (p < 1) frame = requestAnimationFrame(tick);
+        };
+
+        frame = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(frame);
+    }, [target, run]);
+
+    return value;
+}
+
+function Stat({ item, run }) {
+    const Icon = STAT_ICONS[item.icon] || FolderKanban;
+
+    // "20+" -> counts 20 then re-appends the "+"; non-numeric values render as-is
+    const parsed = /^(\d+)(.*)$/.exec(item.value);
+    const counted = useCountUp(parsed ? Number(parsed[1]) : 0, run && Boolean(parsed));
+    const display = parsed ? `${counted}${parsed[2]}` : item.value;
+
+    return (
+        <div className='flex items-center gap-3 px-4 py-3'>
+            <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-hairline bg-tile text-accent'>
+                <Icon size={20} />
+            </span>
+
+            <div>
+                <p className='text-2xl font-bold leading-none tabular-nums text-heading'>{display}</p>
+                <p className='mt-1.5 max-w-[7rem] text-xs leading-4 text-muted'>{item.label}</p>
+            </div>
+        </div>
+    );
+}
+
+export default function StatGrid({ stats = [], className = '' }) {
+    const { ref, inView } = useInView({ rootMargin: '0px' });
+
     if (!stats.length) return null;
 
-    if (variant === 'bar') {
-        return (
-            <div
-                className={`grid max-w-xl grid-cols-1 divide-y divide-hairline rounded-2xl border border-line bg-card px-2 py-4 backdrop-blur sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}>
-                {stats.map((item) => {
-                    const Icon = STAT_ICONS[item.icon] || FolderKanban;
-
-                    return (
-                        <div
-                            key={item.label}
-                            className='flex items-center gap-3 px-4 py-3'>
-                            <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-hairline bg-tile text-accent'>
-                                <Icon size={20} />
-                            </span>
-
-                            <div>
-                                <p className='text-2xl font-bold leading-none text-heading'>{item.value}</p>
-                                <p className='mt-1.5 max-w-[7rem] text-xs leading-4 text-muted'>{item.label}</p>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
-        );
-    }
-
-    // Original layout — do not change, other sections depend on it
     return (
-        <div className={`grid grid-cols-2 gap-2 ${className}`}>
+        <div
+            ref={ref}
+            className={`grid max-w-xl grid-cols-1 divide-y divide-hairline rounded-2xl border border-line bg-card px-2 py-4 backdrop-blur sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}>
             {stats.map((item) => (
-                <div
+                <Stat
                     key={item.label}
-                    className='rounded-2xl border border-line bg-card p-4'>
-                    <p className='text-xl font-bold text-accent'>{item.value}</p>
-                    <p className='text-sm text-muted'>{item.label}</p>
-                </div>
+                    item={item}
+                    run={inView}
+                />
             ))}
         </div>
     );

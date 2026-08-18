@@ -2,6 +2,7 @@ import { TestTube2, Braces, Layers3, FileText, Wrench, LayoutDashboard } from 'l
 import Section from '../common/Section';
 import SectionTitle from '../common/SectionTitle';
 import Pill from '../common/Pill';
+import Reveal from '../common/Reveal';
 import { portfolio } from '../../data/portfolioData';
 
 const GROUP_ICONS = {
@@ -23,12 +24,13 @@ export default function SkillsSection() {
             />
 
             <div className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
-                {Object.entries(portfolio.skills).map(([group, items]) => {
+                {Object.entries(portfolio.skills).map(([group, items], i) => {
                     const Icon = GROUP_ICONS[group];
 
                     return (
-                        <div
+                        <Reveal
                             key={group}
+                            delay={i * 70}
                             className='group rounded-3xl border border-line bg-slab p-4 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-accent-line hover:bg-slab-hover hover:shadow-lg hover:shadow-accent-tint sm:p-6'>
                             <div className='mb-4 flex items-center gap-3'>
                                 <Icon className='text-accent transition-all duration-300 ease-out group-hover:rotate-3 group-hover:scale-110' />
@@ -40,7 +42,7 @@ export default function SkillsSection() {
                                     <Pill key={skill}>{skill}</Pill>
                                 ))}
                             </div>
-                        </div>
+                        </Reveal>
                     );
                 })}
             </div>

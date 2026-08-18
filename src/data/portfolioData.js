@@ -58,7 +58,7 @@ export const portfolio = {
     // Two cards at the bottom of the dashboard. icon keys: monitor | folder | tools | calendar | projects
     heroHighlights: [
         { title: 'Web QA', subtitle: 'Primary Focus', icon: 'monitor' },
-        { title: '5+ Projects', subtitle: 'Completed', icon: 'folder' },
+        { title: '30+ Projects', subtitle: 'Completed', icon: 'folder' },
     ],
 
     competencies: [

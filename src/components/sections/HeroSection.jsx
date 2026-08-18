@@ -47,18 +47,15 @@ export default function HeroSection() {
     const heroHighlights = portfolio.heroHighlights?.length ? portfolio.heroHighlights : FALLBACK_HIGHLIGHTS;
 
     const strengthsRef = useRef(null);
-    const [barsVisible, setBarsVisible] = useState(false);
+    // IntersectionObserver না থাকলে (পুরনো ব্রাউজার) বারগুলো সরাসরি ভরা দেখাবে
+    const [barsVisible, setBarsVisible] = useState(() => typeof IntersectionObserver === 'undefined');
 
     useEffect(() => {
         const node = strengthsRef.current;
-        if (!node) return;
+        if (!node || typeof IntersectionObserver === 'undefined') return;
 
-        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduced) {
-            setBarsVisible(true);
-            return;
-        }
-
+        // threshold রাখা হয়েছে কম + নিচ থেকে rootMargin — ছোট মোবাইল ভিউপোর্টে
+        // প্যানেলটা স্ক্রিনের চেয়ে লম্বা হলেও যেন observer ফায়ার করে
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -66,7 +63,7 @@ export default function HeroSection() {
                     observer.disconnect();
                 }
             },
-            { threshold: 0.35 },
+            { threshold: 0, rootMargin: '0px 0px -15% 0px' },
         );
 
         observer.observe(node);
@@ -138,7 +135,10 @@ export default function HeroSection() {
     xl এবং তার উপরে : বাঁকা পথ ধরে কলাম  */}
                 <div className='relative xl:self-stretch'>
                     {/* মোবাইলের খাড়া রেল */}
-                    <span className='pointer-events-none absolute bottom-3 left-[15px] top-3 w-px animate-[qa-flow_1.2s_linear_infinite] bg-[repeating-linear-gradient(to_bottom,rgba(34,211,238,0.55)_0_5px,transparent_5px_14px)] bg-[length:1px_14px] sm:left-[19px] xl:hidden' />
+                    <span className='pointer-events-none absolute bottom-3 left-[15px] top-3 w-px animate-[qa-flow_1.2s_linear_infinite] bg-[repeating-linear-gradient(to_bottom,rgba(34,211,238,0.55)_0_5px,transparent_5px_14px)] bg-[length:1px_14px] sm:left-[19px] xl:hidden'>
+                        {/* রেল বেয়ে নেমে আসা পালস — xl এ SVG এর dot এটার কাজ করে */}
+                        <span className='absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 animate-[qa-dot_5s_linear_infinite] rounded-full bg-cyan-300 shadow-[0_0_12px_4px_rgba(34,211,238,0.55)] motion-reduce:hidden' />
+                    </span>
 
                     {/* xl এর বাঁকা পথ */}
                     <svg
@@ -187,7 +187,12 @@ export default function HeroSection() {
                                 key={check.title}
                                 className={`relative rounded-2xl border border-cyan-400/15 bg-slate-900/80 px-4 py-3 shadow-lg shadow-cyan-950/40 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/35 xl:w-fit ${i % 2 === 0 ? 'xl:translate-x-6' : ''}`}>
                                 {/* রেলের উপরের নোড */}
-                                <span className='absolute -left-[30px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-cyan-400 ring-4 ring-cyan-400/15 sm:-left-[34px] xl:hidden' />
+                                <span className='absolute -left-[30px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-cyan-400 ring-4 ring-cyan-400/15 sm:-left-[34px] xl:hidden'>
+                                    <span
+                                        style={{ animationDelay: `${i * 400}ms` }}
+                                        className='absolute inset-0 animate-[node-pulse_2.4s_ease-in-out_infinite] rounded-full motion-reduce:animate-none'
+                                    />
+                                </span>
 
                                 <div className='flex items-center gap-3'>
                                     <CheckCircle2
@@ -260,7 +265,7 @@ export default function HeroSection() {
                                                         width: barsVisible ? `${item.level}%` : '0%',
                                                         transitionDelay: `${i * 140}ms`,
                                                     }}
-                                                    className='relative h-full overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-[width] duration-[1100ms] ease-out'>
+                                                    className='relative h-full overflow-hidden rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_10px_rgba(34,211,238,0.45)] transition-[width] duration-[1100ms] ease-out motion-reduce:transition-none'>
                                                     <span className='absolute inset-0 animate-[bar-shimmer_2.4s_ease-in-out_infinite] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent)]' />
                                                 </div>
                                             </div>

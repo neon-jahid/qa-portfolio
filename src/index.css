@@ -52,6 +52,34 @@ body {
         animation: none;
     }
 }
+/* Travelling pulse down the mobile QA rail (the xl view uses the SVG path instead) */
+@keyframes qa-dot {
+    0% {
+        top: 0%;
+        opacity: 0;
+    }
+    8% {
+        opacity: 1;
+    }
+    92% {
+        opacity: 1;
+    }
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes node-pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(34, 211, 238, 0);
+    }
+}
+
 @keyframes bar-shimmer {
     0% {
         transform: translateX(-100%);

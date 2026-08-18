@@ -10,6 +10,10 @@ const STAT_ICONS = {
 
 const prefersReducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// How long the stat counters take to reach their value. Tune here.
+const COUNT_MS = 2400;
+const COUNT_MS_REDUCED = 800;
+
 /**
  * Counts 0 → target once `run` flips true. It still counts under reduced
  * motion — a number frozen at its final value reads as broken — just quicker,
@@ -23,7 +27,7 @@ function useCountUp(target, run) {
 
         let frame;
         let started;
-        const DURATION = prefersReducedMotion() ? 350 : 1100;
+        const DURATION = prefersReducedMotion() ? COUNT_MS_REDUCED : COUNT_MS;
 
         const tick = (now) => {
             if (started === undefined) started = now;

@@ -1,36 +1,10 @@
 import { ArrowRight, Code2, Download, ShieldCheck, Users } from 'lucide-react';
 import Container from '../common/Container';
+import { SECTION_PADDING } from '../common/Section';
 import StatGrid from '../common/StatGrid';
+import { TONES } from '../../lib/tones';
 import { portfolio } from '../../data/portfolioData';
 import { useEffect, useRef, useState } from 'react';
-
-/**
- * One colour per QA check card. Class strings are written out in full — Tailwind
- * scans source text, so `bg-check-${tone}` would never be generated.
- * `cssVar` re-tints the node-pulse halo to match its card.
- */
-const CHECK_TONES = {
-    pass: {
-        tile: 'border-check-pass/25 bg-check-pass/10 text-check-pass',
-        node: 'bg-check-pass ring-check-pass/20',
-        cssVar: '--color-check-pass',
-    },
-    api: {
-        tile: 'border-check-api/25 bg-check-api/10 text-check-api',
-        node: 'bg-check-api ring-check-api/20',
-        cssVar: '--color-check-api',
-    },
-    regression: {
-        tile: 'border-check-regression/25 bg-check-regression/10 text-check-regression',
-        node: 'bg-check-regression ring-check-regression/20',
-        cssVar: '--color-check-regression',
-    },
-    automation: {
-        tile: 'border-check-automation/25 bg-check-automation/10 text-check-automation',
-        node: 'bg-check-automation ring-check-automation/20',
-        cssVar: '--color-check-automation',
-    },
-};
 
 export default function HeroSection() {
     const { availability, name, role, heroTagline, resumeUrl, stats, heroQuote, heroDashboard, coreStrengths, testingTools, heroChecks } = portfolio;
@@ -62,7 +36,7 @@ export default function HeroSection() {
     return (
         <section
             id='home'
-            className='relative overflow-hidden bg-page py-12 sm:py-16 md:py-20 lg:py-24'>
+            className={`relative overflow-hidden bg-page ${SECTION_PADDING}`}>
             {/* Ambient glow — dialled back in light mode, where a strong wash muddies the text */}
             <div className='pointer-events-none absolute inset-0 -z-10 opacity-50 bg-[radial-gradient(circle_at_78%_18%,rgba(34,211,238,0.14),transparent_45%),radial-gradient(circle_at_10%_85%,rgba(59,130,246,0.12),transparent_45%)] dark:opacity-100' />
 
@@ -179,7 +153,7 @@ export default function HeroSection() {
                     <div className='relative flex flex-col gap-4 pl-10 sm:pl-12 xl:h-full xl:justify-between xl:gap-0 xl:py-2 xl:pl-0'>
                         {heroChecks.map((check, i) => {
                             const Icon = check.icon;
-                            const tone = CHECK_TONES[check.tone] ?? CHECK_TONES.pass;
+                            const tone = TONES[check.tone] ?? TONES.cyan;
 
                             return (
                                 <div

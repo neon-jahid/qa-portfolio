@@ -9,12 +9,17 @@ import {
     Database,
     FileSpreadsheet,
     FileText,
+    Gauge,
+    Layers3,
     MonitorSmartphone,
+    Package,
     RefreshCw,
     SearchCheck,
     Settings,
     ShieldCheck,
+    Signal,
     TestTube2,
+    Ticket,
     Webhook,
     Workflow,
     Wrench,
@@ -72,12 +77,12 @@ export const portfolio = {
     ],
 
     // Cards along the QA connector. Keep this at 4 — the xl curved path is drawn for four nodes.
-    // `tone` maps to a colour set in HeroSection.jsx (pass | api | regression | automation)
+    // `tone` keys into the shared palette in src/lib/tones.js
     heroChecks: [
-        { title: 'Test Passed', subtitle: 'All systems', icon: CheckCircle2, tone: 'pass' },
-        { title: 'API Validated', subtitle: '200 OK', icon: Webhook, tone: 'api' },
-        { title: 'Regression Complete', subtitle: 'No critical bugs', icon: RefreshCw, tone: 'regression' },
-        { title: 'Automation Ready', subtitle: 'Tests running', icon: Bot, tone: 'automation' },
+        { title: 'Test Passed', subtitle: 'All systems', icon: CheckCircle2, tone: 'emerald' },
+        { title: 'API Validated', subtitle: '200 OK', icon: Webhook, tone: 'blue' },
+        { title: 'Regression Complete', subtitle: 'No critical bugs', icon: RefreshCw, tone: 'violet' },
+        { title: 'Automation Ready', subtitle: 'Tests running', icon: Bot, tone: 'amber' },
     ],
 
     // "What I Do Best" master/detail list. Numbering (01, 02, …) comes from array order.
@@ -309,6 +314,7 @@ test.describe('Login', () => {
     projects: [
         {
             name: 'Airtel BD',
+            icon: Signal,
             type: 'Telecom Customer Portal',
             period: '2023 – 2025',
             stack: ['Web QA', 'Regression', 'Cross-Browser'],
@@ -316,6 +322,7 @@ test.describe('Login', () => {
         },
         {
             name: 'Laxfo Electronics',
+            icon: Package,
             type: 'Product Catalog Website',
             period: '2024 – Present',
             stack: ['Next.js', 'Responsive QA', 'CMS'],
@@ -323,6 +330,7 @@ test.describe('Login', () => {
         },
         {
             name: 'LetsVibe BD',
+            icon: Ticket,
             type: 'Ticketing Platform',
             period: '2025-2026',
             stack: ['Playwright', 'POM', 'Test Cases'],
@@ -330,6 +338,7 @@ test.describe('Login', () => {
         },
         {
             name: 'Smart-Lab Global',
+            icon: Layers3,
             type: 'Web, Mobile & API QA',
             period: '2024-2025',
             stack: ['API', 'Mobile', 'Traceability'],
@@ -337,6 +346,7 @@ test.describe('Login', () => {
         },
         {
             name: 'DBL Ceramics',
+            icon: Gauge,
             type: 'Website Audit',
             period: '2023-Present',
             stack: ['UI/UX', 'Performance', 'CMS'],

@@ -48,12 +48,16 @@
     --color-brand: #0e7490;
     --color-on-brand: #ffffff;
 
-    /* Hero QA checks — one tone per card. Used with /10 and /25 opacity
-       modifiers for the icon tile fill and border. */
-    --color-check-pass: #047857;
-    --color-check-api: #1d4ed8;
-    --color-check-regression: #6d28d9;
-    --color-check-automation: #b45309;
+    /* Accent tones cycled across card sets (hero checks, process steps,
+       toolkit groups, expertise rows). Used with /10 /20 /25 opacity
+       modifiers for tile fills, borders and rings. See src/lib/tones.js.
+       Light values are 700-weight so they stay legible as text. */
+    --color-tone-cyan: #0e7490;
+    --color-tone-emerald: #047857;
+    --color-tone-blue: #1d4ed8;
+    --color-tone-violet: #6d28d9;
+    --color-tone-amber: #92400e; /* amber-800 — 700 fails as text on its own /10 tint */
+    --color-tone-rose: #be123c;
 
     /* Editor panel — VS Code "Light+" flavoured, tuned for contrast on --color-code */
     --color-chrome: rgb(15 23 42 / 0.05);
@@ -115,10 +119,12 @@
     --color-brand: #22d3ee;
     --color-on-brand: #020617;
 
-    --color-check-pass: #34d399;
-    --color-check-api: #60a5fa;
-    --color-check-regression: #a78bfa;
-    --color-check-automation: #fbbf24;
+    --color-tone-cyan: #22d3ee;
+    --color-tone-emerald: #34d399;
+    --color-tone-blue: #60a5fa;
+    --color-tone-violet: #a78bfa;
+    --color-tone-amber: #fbbf24;
+    --color-tone-rose: #fb7185;
 
     /* VS Code "Dark+" flavoured */
     --color-chrome: rgb(255 255 255 / 0.04);

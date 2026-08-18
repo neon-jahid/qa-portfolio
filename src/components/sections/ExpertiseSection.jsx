@@ -2,17 +2,18 @@ import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import Section from '../common/Section';
 import SectionTitle from '../common/SectionTitle';
+import { toneAt } from '../../lib/tones';
 import { portfolio } from '../../data/portfolioData';
 
 const num = (i) => String(i + 1).padStart(2, '0');
 
-function Tags({ tags }) {
+function Tags({ tags, tone }) {
     return (
         <div className='flex flex-wrap gap-2'>
             {tags.map((tag) => (
                 <span
                     key={tag}
-                    className='whitespace-nowrap rounded-full border border-accent-line bg-accent-tint px-3 py-1 text-xs font-medium text-accent'>
+                    className={`whitespace-nowrap rounded-full border px-3 py-1 text-xs font-medium ${tone.chip}`}>
                     {tag}
                 </span>
             ))}
@@ -25,6 +26,7 @@ export default function ExpertiseSection() {
     const { expertise } = portfolio;
     const activeItem = expertise[active];
     const ActiveIcon = activeItem.icon;
+    const activeTone = toneAt(active);
 
     return (
         <Section id='expertise'>
@@ -41,6 +43,7 @@ export default function ExpertiseSection() {
                         const isActive = i === active;
                         const select = () => setActive(i);
                         const Icon = item.icon;
+                        const tone = toneAt(i);
 
                         return (
                             <div
@@ -55,18 +58,18 @@ export default function ExpertiseSection() {
                                     aria-controls={`expertise-panel-${i}`}
                                     aria-expanded={isActive}
                                     className='group flex w-full cursor-pointer items-center gap-3 py-4 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong sm:gap-5'>
-                                    <span className={`font-mono text-sm font-semibold transition-colors duration-300 ${isActive ? 'text-accent' : 'text-faint'}`}>{num(i)}</span>
+                                    <span className={`font-mono text-sm font-semibold transition-colors duration-300 ${isActive ? tone.text : 'text-faint'}`}>{num(i)}</span>
 
                                     <span
                                         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-colors duration-300 ${
-                                            isActive ? 'border-accent-line bg-accent-tint text-accent' : 'border-hairline bg-tile text-muted group-hover:text-accent'
+                                            isActive ? tone.tile : 'border-hairline bg-tile text-muted'
                                         }`}>
                                         <Icon size={17} />
                                     </span>
 
                                     <span
                                         className={`min-w-0 flex-1 text-base font-bold tracking-tight transition-colors duration-300 sm:text-lg lg:text-xl ${
-                                            isActive ? 'text-accent' : 'text-heading group-hover:text-accent'
+                                            isActive ? tone.text : 'text-heading'
                                         }`}>
                                         {item.title}
                                     </span>
@@ -75,7 +78,7 @@ export default function ExpertiseSection() {
                                     <ArrowRight
                                         size={20}
                                         aria-hidden='true'
-                                        className={`hidden shrink-0 text-accent transition-all duration-300 sm:block ${isActive ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'}`}
+                                        className={`hidden shrink-0 transition-all duration-300 sm:block ${isActive ? `translate-x-0 opacity-100 ${tone.text}` : '-translate-x-2 opacity-0'}`}
                                     />
                                 </button>
 
@@ -87,7 +90,7 @@ export default function ExpertiseSection() {
                                         {/* indented to line up with the row's icon tile */}
                                         <div className='flex flex-col gap-4 pb-6 pl-10'>
                                             <p className='leading-7 text-body'>{item.description}</p>
-                                            <Tags tags={item.tags} />
+                                            <Tags tags={item.tags} tone={tone} />
                                         </div>
                                     </div>
                                 </div>
@@ -107,17 +110,17 @@ export default function ExpertiseSection() {
                             key={active}
                             className='flex animate-[detail-in_0.35s_ease-out] flex-col gap-6 motion-reduce:animate-none'>
                             <div className='flex items-center gap-4'>
-                                <span className='flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-accent-line bg-accent-tint text-accent'>
+                                <span className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border ${activeTone.tile}`}>
                                     <ActiveIcon size={26} />
                                 </span>
-                                <span className='font-mono text-sm font-semibold text-accent'>{num(active)}</span>
+                                <span className={`font-mono text-sm font-semibold ${activeTone.text}`}>{num(active)}</span>
                             </div>
 
                             <h3 className='text-3xl font-bold tracking-tight text-heading'>{activeItem.title}</h3>
 
                             <p className='text-lg leading-8 text-body'>{activeItem.description}</p>
 
-                            <Tags tags={activeItem.tags} />
+                            <Tags tags={activeItem.tags} tone={activeTone} />
                         </div>
                     </div>
                 </div>

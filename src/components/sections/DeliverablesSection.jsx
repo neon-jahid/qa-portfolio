@@ -13,9 +13,9 @@ export default function DeliverablesSection() {
       />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {portfolio.deliverables.map((item) => (
-          <div key={item} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-slate-950 p-4">
+          <div key={item} className="flex min-w-0 items-center gap-3 rounded-2xl border border-white/10 bg-slate-950 p-4">
             <FileSpreadsheet className="shrink-0 text-cyan-300" size={20} />
-            <span>{item}</span>
+            <span className="min-w-0 break-words">{item}</span>
           </div>
         ))}
       </div>

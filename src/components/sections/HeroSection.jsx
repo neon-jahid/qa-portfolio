@@ -76,14 +76,14 @@ export default function HeroSection() {
     return (
         <section
             id='home'
-            className='relative overflow-hidden bg-slate-950 py-14 md:py-20 lg:py-24'>
+            className='relative overflow-hidden bg-slate-950 py-12 sm:py-16 md:py-20 lg:py-24'>
             {/* Ambient glow */}
             <div className='pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_18%,rgba(34,211,238,0.14),transparent_45%),radial-gradient(circle_at_10%_85%,rgba(59,130,246,0.12),transparent_45%)]' />
 
             {/* Circuit-style grid fading in from the bottom */}
             <div className='pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-80 bg-[linear-gradient(to_right,rgba(34,211,238,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(34,211,238,0.07)_1px,transparent_1px)] bg-[size:46px_46px] [mask-image:linear-gradient(to_top,black,transparent_85%)]' />
 
-            <Container className='grid items-center gap-12 xl:grid-cols-[1fr_190px_1.05fr] xl:gap-8'>
+            <Container className='grid grid-cols-1 items-center gap-10 md:gap-12 xl:grid-cols-[1fr_190px_1.05fr] xl:gap-8'>
                 {/* ---------------- Left: intro ---------------- */}
                 <div>
                     <p className='mb-6 inline-flex items-center gap-2.5 rounded-xl border border-cyan-400/25 bg-cyan-400/[0.07] px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-cyan-300'>
@@ -94,16 +94,16 @@ export default function HeroSection() {
                         {portfolio.availability}
                     </p>
 
-                    <h1 className='text-4xl font-black leading-[1.05] tracking-tight sm:text-4xl md:text-5xl xl:text-[3rem]'>
+                    <h1 className='text-3xl font-black leading-[1.05] tracking-tight sm:text-4xl md:text-5xl xl:text-[3rem]'>
                         <span className='block text-white'>{portfolio.name}</span>
 
                         <span className='mt-3 block bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent'>{portfolio.role}</span>
                     </h1>
 
-                    <p className='mt-6 max-w-xl text-base leading-8 text-slate-400'>{portfolio.heroTagline}</p>
+                    <p className='mt-6 max-w-xl text-sm leading-7 text-slate-400 sm:text-base sm:leading-8'>{portfolio.heroTagline}</p>
 
                     {/* CTAs */}
-                    <div className='mt-8 flex flex-wrap gap-4'>
+                    <div className='mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4'>
                         <a
                             href='#contact'
                             className='group inline-flex items-center gap-2.5 rounded-xl bg-cyan-400 px-6 py-3.5 font-semibold text-slate-950 shadow-lg shadow-cyan-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-300 hover:shadow-cyan-400/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300'>
@@ -138,7 +138,7 @@ export default function HeroSection() {
     xl এবং তার উপরে : বাঁকা পথ ধরে কলাম  */}
                 <div className='relative xl:self-stretch'>
                     {/* মোবাইলের খাড়া রেল */}
-                    <span className='pointer-events-none absolute bottom-3 left-[19px] top-3 w-px animate-[qa-flow_1.2s_linear_infinite] bg-[repeating-linear-gradient(to_bottom,rgba(34,211,238,0.55)_0_5px,transparent_5px_14px)] bg-[length:1px_14px] xl:hidden' />
+                    <span className='pointer-events-none absolute bottom-3 left-[15px] top-3 w-px animate-[qa-flow_1.2s_linear_infinite] bg-[repeating-linear-gradient(to_bottom,rgba(34,211,238,0.55)_0_5px,transparent_5px_14px)] bg-[length:1px_14px] sm:left-[19px] xl:hidden' />
 
                     {/* xl এর বাঁকা পথ */}
                     <svg
@@ -181,13 +181,13 @@ export default function HeroSection() {
                         </circle>
                     </svg>
 
-                    <div className='relative flex flex-col gap-4 pl-12 xl:h-full xl:justify-between xl:gap-0 xl:py-2 xl:pl-0'>
+                    <div className='relative flex flex-col gap-4 pl-10 sm:pl-12 xl:h-full xl:justify-between xl:gap-0 xl:py-2 xl:pl-0'>
                         {heroChecks.slice(0, 4).map((check, i) => (
                             <div
                                 key={check.title}
                                 className={`relative rounded-2xl border border-cyan-400/15 bg-slate-900/80 px-4 py-3 shadow-lg shadow-cyan-950/40 backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/35 xl:w-fit ${i % 2 === 0 ? 'xl:translate-x-6' : ''}`}>
                                 {/* রেলের উপরের নোড */}
-                                <span className='absolute -left-[34px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-cyan-400 ring-4 ring-cyan-400/15 xl:hidden' />
+                                <span className='absolute -left-[30px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-cyan-400 ring-4 ring-cyan-400/15 sm:-left-[34px] xl:hidden' />
 
                                 <div className='flex items-center gap-3'>
                                     <CheckCircle2
@@ -205,7 +205,7 @@ export default function HeroSection() {
                     </div>
                 </div>
                 {/* ---------------- Right: QA dashboard ---------------- */}
-                <div className='rounded-[1.75rem] border border-cyan-400/15 bg-slate-900/40 p-4 shadow-2xl shadow-cyan-950/40 backdrop-blur-sm md:p-6'>
+                <div className='rounded-[1.75rem] border border-cyan-400/15 bg-slate-900/40 p-3 shadow-2xl shadow-cyan-950/40 backdrop-blur-sm sm:p-4 md:p-6'>
                     {/* Header */}
                     <div className='flex items-start justify-between gap-4'>
                         <div className='flex items-center gap-4'>
@@ -217,7 +217,7 @@ export default function HeroSection() {
                             </span>
 
                             <div>
-                                <h2 className='text-xl font-bold uppercase tracking-[0.06em] text-white md:text-2xl'>QA Engineering</h2>
+                                <h2 className='text-lg font-bold uppercase tracking-[0.06em] text-white sm:text-xl md:text-2xl'>QA Engineering</h2>
                                 <p className='mt-1 text-sm text-slate-400'>{portfolio.heroQuote || "Quality is not an act, it's a habit."}</p>
                             </div>
                         </div>
@@ -233,7 +233,7 @@ export default function HeroSection() {
                     {/* Panel: strengths + tools */}
                     <div
                         ref={strengthsRef}
-                        className='mt-6 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 md:p-6'>
+                        className='mt-6 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 md:p-6'>
                         <h3 className='text-xs font-semibold uppercase tracking-[0.14em] text-cyan-300'>Core Strengths</h3>
 
                         <div className='mt-5 space-y-5'>

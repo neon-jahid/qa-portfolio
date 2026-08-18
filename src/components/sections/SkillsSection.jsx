@@ -22,7 +22,7 @@ export default function SkillsSection() {
                 description='A practical quality engineering skill set covering manual testing, automation, documentation, defect lifecycle, and cross-functional delivery.'
             />
 
-            <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
                 {portfolio.competencies.map((item) => (
                     <div
                         key={item}
@@ -36,14 +36,14 @@ export default function SkillsSection() {
                 ))}
             </div>
 
-            <div className='mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3'>
+            <div className='mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
                 {Object.entries(portfolio.skills).map(([group, items]) => {
                     const Icon = skillIcons[group];
 
                     return (
                         <div
                             key={group}
-                            className='group rounded-3xl border border-white/10 bg-slate-900/70 p-6
+                            className='group rounded-3xl border border-white/10 bg-slate-900/70 p-4 sm:p-6
                 transition-all duration-300 ease-out
                 hover:-translate-y-1
                 hover:border-cyan-300/30

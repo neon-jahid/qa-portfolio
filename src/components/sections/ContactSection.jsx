@@ -29,13 +29,13 @@ export default function ContactSection() {
     return (
         <section
             id='contact'
-            className='px-6 py-20'>
-            <div className='mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-8 text-center md:p-12'>
+            className='px-4 py-12 sm:px-6 md:py-20'>
+            <div className='mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-gradient-to-br from-slate-900 to-slate-950 p-6 text-center sm:p-8 md:p-12'>
                 <p className='mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400'>Contact</p>
-                <h2 className='text-3xl font-bold text-white md:text-5xl'>Let’s build reliable products.</h2>
+                <h2 className='text-2xl font-bold text-white sm:text-3xl md:text-5xl'>Let’s build reliable products.</h2>
                 <p className='mx-auto mt-4 max-w-2xl text-slate-300'>Open to SQA, QA Automation, and QA process improvement opportunities.</p>
 
-                <div className='mt-8 flex flex-wrap justify-center gap-4'>
+                <div className='mt-8 flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4'>
                     <a
                         href={`mailto:${portfolio.email}`}
                         className='inline-flex items-center gap-2 rounded-2xl bg-cyan-400 px-5 py-3 font-semibold text-slate-950 hover:bg-cyan-300'>

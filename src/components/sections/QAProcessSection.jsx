@@ -11,7 +11,7 @@ export default function QAProcessSection() {
         title="How I Approach Quality"
         description="A clear testing workflow that helps reduce release risk, improve team communication, and keep defects traceable from discovery to closure."
       />
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {portfolio.qaProcess.map((item) => (
           <IconCard key={item.title} {...item} />
         ))}

@@ -9,10 +9,10 @@ export default function ExperienceSection() {
       <SectionTitle eyebrow="Experience" title="Professional Experience" />
 
       {portfolio.experience.map((job) => (
-        <div key={job.company} className="rounded-3xl border border-white/10 bg-slate-900/70 p-6 md:p-8">
+        <div key={job.company} className="rounded-3xl border border-white/10 bg-slate-900/70 p-4 sm:p-6 md:p-8">
           <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row">
             <div>
-              <h3 className="text-2xl font-bold text-white">{job.title}</h3>
+              <h3 className="text-xl font-bold text-white sm:text-2xl">{job.title}</h3>
               <p className="mt-1 text-cyan-300">
                 {job.company} • {job.location}
               </p>

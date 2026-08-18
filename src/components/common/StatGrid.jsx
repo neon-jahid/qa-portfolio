@@ -20,7 +20,7 @@ export default function StatGrid({ stats = [], variant = 'cards', className = ''
     if (variant === 'bar') {
         return (
             <div
-                className={`grid max-w-xl grid-cols-1 divide-y divide-white/[0.08] rounded-2xl border border-white/10 bg-white/[0.03] px-2 py-4 backdrop-blur sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}>
+                className={`grid max-w-xl grid-cols-1 divide-y divide-hairline rounded-2xl border border-line bg-card px-2 py-4 backdrop-blur sm:grid-cols-3 sm:divide-x sm:divide-y-0 ${className}`}>
                 {stats.map((item) => {
                     const Icon = STAT_ICONS[item.icon] || FolderKanban;
 
@@ -28,13 +28,13 @@ export default function StatGrid({ stats = [], variant = 'cards', className = ''
                         <div
                             key={item.label}
                             className='flex items-center gap-3 px-4 py-3'>
-                            <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/[0.07] bg-slate-800/60 text-cyan-300'>
+                            <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-hairline bg-tile text-accent'>
                                 <Icon size={20} />
                             </span>
 
                             <div>
-                                <p className='text-2xl font-bold leading-none text-white'>{item.value}</p>
-                                <p className='mt-1.5 max-w-[7rem] text-xs leading-4 text-slate-400'>{item.label}</p>
+                                <p className='text-2xl font-bold leading-none text-heading'>{item.value}</p>
+                                <p className='mt-1.5 max-w-[7rem] text-xs leading-4 text-muted'>{item.label}</p>
                             </div>
                         </div>
                     );
@@ -49,9 +49,9 @@ export default function StatGrid({ stats = [], variant = 'cards', className = ''
             {stats.map((item) => (
                 <div
                     key={item.label}
-                    className='rounded-2xl border border-white/10 bg-white/5 p-4'>
-                    <p className='text-xl font-bold text-cyan-300'>{item.value}</p>
-                    <p className='text-sm text-slate-400'>{item.label}</p>
+                    className='rounded-2xl border border-line bg-card p-4'>
+                    <p className='text-xl font-bold text-accent'>{item.value}</p>
+                    <p className='text-sm text-muted'>{item.label}</p>
                 </div>
             ))}
         </div>

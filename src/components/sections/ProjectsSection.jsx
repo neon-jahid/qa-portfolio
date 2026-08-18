@@ -5,7 +5,7 @@ import { portfolio } from "../../data/portfolioData";
 
 export default function ProjectsSection() {
   return (
-    <Section id="projects" className="bg-slate-900/50">
+    <Section id="projects" className="bg-panel">
       <SectionTitle
         eyebrow="Selected Work"
         title="Key QA Projects"

@@ -5,7 +5,7 @@ import { portfolio } from "../../data/portfolioData";
 
 export default function QAProcessSection() {
   return (
-    <Section id="process" className="bg-slate-900/50">
+    <Section id="process" className="bg-panel">
       <SectionTitle
         eyebrow="QA Workflow"
         title="How I Approach Quality"

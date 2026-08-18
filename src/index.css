@@ -1,12 +1,136 @@
 @import 'tailwindcss';
 
+/* Theme is driven by a `.dark` class on <html>, not by prefers-color-scheme,
+   so the toggle can override the OS. index.html sets it before first paint. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------
+   Semantic colour tokens.
+   The values below are the LIGHT theme; `.dark` further down swaps them
+   to the original slate/cyan palette, so every utility built on these
+   tokens works in both themes without a `dark:` variant.
+   ------------------------------------------------------------------ */
+@theme {
+    /* Surfaces */
+    --color-page: #f6f8fb;
+    --color-panel: #eaeff5;
+    --color-nav: rgb(246 248 251 / 0.8);
+    --color-nav-solid: rgb(246 248 251 / 0.97);
+    --color-card: #ffffff;
+    --color-card-hover: #eff7f9;
+    --color-inset: rgb(15 23 42 / 0.03);
+    --color-slab: #ffffff;
+    --color-slab-hover: #f7fbfc;
+    --color-raised: #ffffff;
+    --color-glass: rgb(255 255 255 / 0.7);
+    --color-well: #ffffff;
+    --color-code: #eef2f7;
+    --color-tile: #ecfeff;
+    --color-cta-from: #ffffff;
+    --color-cta-to: #e6f4f8;
+
+    /* Borders */
+    --color-line: rgb(15 23 42 / 0.1);
+    --color-hairline: rgb(15 23 42 / 0.07);
+
+    /* Text */
+    --color-heading: #0f172a;
+    --color-body: #334155;
+    --color-muted: #475569;
+    --color-faint: #5b6a7d;
+    --color-dot: #cbd5e1; /* purely decorative — exempt from text contrast */
+
+    /* Accent. `accent` is the text-safe tone; `accent-strong` is darker still,
+       used for eyebrows, hovers and the decorative dots/strokes. */
+    --color-accent: #0c6b84;
+    --color-accent-strong: #155e75;
+    --color-accent-tint: rgb(8 145 178 / 0.1);
+    --color-accent-line: rgb(8 145 178 / 0.3);
+    --color-brand: #0e7490;
+    --color-on-brand: #ffffff;
+
+    /* Editor panel — VS Code "Light+" flavoured, tuned for contrast on --color-code */
+    --color-chrome: rgb(15 23 42 / 0.05);
+    --color-gutter: #6f7b8c;
+    --color-syntax-comment: #0f7a2e;
+    --color-syntax-folder: #0550ae;
+    --color-syntax-spec: #7a5c00;
+    --color-syntax-file: #001080;
+    --color-syntax-key: #6f42c1;
+    --color-syntax-string: #a31515;
+    --color-syntax-punct: #79839a;
+
+    /* Decorative: hero rail / connector strokes */
+    --color-rail: rgb(8 145 178 / 0.55);
+    --color-grid: rgb(8 145 178 / 0.09);
+    --color-pulse-from: rgb(8 145 178 / 0.45);
+    --color-pulse-to: rgb(8 145 178 / 0);
+}
+
+:root {
+    color-scheme: light;
+}
+
+.dark {
+    color-scheme: dark;
+
+    --color-page: #020617;
+    --color-panel: rgb(15 23 42 / 0.5);
+    --color-nav: rgb(2 6 23 / 0.8);
+    --color-nav-solid: rgb(2 6 23 / 0.95);
+    --color-card: rgb(255 255 255 / 0.04);
+    --color-card-hover: rgb(255 255 255 / 0.07);
+    --color-inset: rgb(255 255 255 / 0.02);
+    --color-slab: rgb(15 23 42 / 0.7);
+    --color-slab-hover: rgb(15 23 42 / 0.9);
+    --color-raised: rgb(15 23 42 / 0.8);
+    --color-glass: rgb(15 23 42 / 0.4);
+    --color-well: #020617;
+    --color-code: #020617;
+    --color-tile: rgb(30 41 59 / 0.6);
+    --color-cta-from: #0f172a;
+    --color-cta-to: #020617;
+
+    --color-line: rgb(255 255 255 / 0.1);
+    --color-hairline: rgb(255 255 255 / 0.07);
+
+    --color-heading: #ffffff;
+    --color-body: #cbd5e1;
+    --color-muted: #94a3b8;
+    --color-faint: #8193a8;
+    --color-dot: #475569;
+
+    --color-accent: #67e8f9;
+    --color-accent-strong: #22d3ee;
+    --color-accent-tint: rgb(34 211 238 / 0.1);
+    --color-accent-line: rgb(34 211 238 / 0.25);
+    --color-brand: #22d3ee;
+    --color-on-brand: #020617;
+
+    /* VS Code "Dark+" flavoured */
+    --color-chrome: rgb(255 255 255 / 0.04);
+    --color-gutter: #64748b;
+    --color-syntax-comment: #6a9955;
+    --color-syntax-folder: #569cd6;
+    --color-syntax-spec: #dcdcaa;
+    --color-syntax-file: #9cdcfe;
+    --color-syntax-key: #c586c0;
+    --color-syntax-string: #ce9178;
+    --color-syntax-punct: #5f6f88;
+
+    --color-rail: rgb(34 211 238 / 0.55);
+    --color-grid: rgb(34 211 238 / 0.07);
+    --color-pulse-from: rgb(34 211 238 / 0.5);
+    --color-pulse-to: rgb(34 211 238 / 0);
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
     margin: 0;
-    background: #020617;
+    background: var(--color-page);
 }
 /* @keyframes speedometer {
     0% {
@@ -73,10 +197,10 @@ body {
 @keyframes node-pulse {
     0%,
     100% {
-        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.5);
+        box-shadow: 0 0 0 0 var(--color-pulse-from);
     }
     50% {
-        box-shadow: 0 0 0 6px rgba(34, 211, 238, 0);
+        box-shadow: 0 0 0 6px var(--color-pulse-to);
     }
 }
 

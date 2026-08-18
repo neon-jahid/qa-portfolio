@@ -26,9 +26,9 @@ export default function SkillsSection() {
                 {portfolio.competencies.map((item) => (
                     <div
                         key={item}
-                        className='flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-cyan-300/30 hover:bg-white/[0.08] hover:shadow-lg hover:shadow-cyan-500/10'>
+                        className='flex items-center gap-3 rounded-2xl border border-line bg-card p-4 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:border-accent-line hover:bg-card-hover hover:shadow-lg hover:shadow-accent-tint'>
                         <CheckCircle2
-                            className='shrink-0 text-cyan-300 transition-transform duration-300 group-hover:scale-110'
+                            className='shrink-0 text-accent transition-transform duration-300 group-hover:scale-110'
                             size={20}
                         />
                         <span>{item}</span>
@@ -43,20 +43,20 @@ export default function SkillsSection() {
                     return (
                         <div
                             key={group}
-                            className='group rounded-3xl border border-white/10 bg-slate-900/70 p-4 sm:p-6
+                            className='group rounded-3xl border border-line bg-slab p-4 sm:p-6
                 transition-all duration-300 ease-out
                 hover:-translate-y-1
-                hover:border-cyan-300/30
-                hover:bg-slate-900/90
+                hover:border-accent-line
+                hover:bg-slab-hover
                 hover:shadow-lg
-                hover:shadow-cyan-500/10'>
+                hover:shadow-accent-tint'>
                             <div className='mb-4 flex items-center gap-3'>
                                 <Icon
-                                    className='text-cyan-300 transition-all duration-300 ease-out
+                                    className='text-accent transition-all duration-300 ease-out
                         group-hover:scale-110
                         group-hover:rotate-3'
                                 />
-                                <h3 className='text-xl font-bold text-white'>{group}</h3>
+                                <h3 className='text-xl font-bold text-heading'>{group}</h3>
                             </div>
 
                             <div className='flex flex-wrap gap-2'>

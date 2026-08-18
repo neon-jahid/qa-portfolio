@@ -4,7 +4,7 @@ export const portfolio = {
     name: 'Jahid Hasan',
     role: 'Software Quality Assurance Engineer',
     location: 'Dhaka, Bangladesh',
-    email: 'iubat.jahid@gmail.com',
+    email: 'jahid.softwindtech@gmail.com',
     phone: '+880 1643-848170',
     resumeUrl: 'https://tinyurl.com/jahids-cv',
     github: 'https://github.com/#',
@@ -45,8 +45,10 @@ export const portfolio = {
     testingTools: [
         { name: 'Playwright', logo: '/logos/playwright.svg' },
         { name: 'Postman', logo: '/logos/postman-icon.svg' },
-        { name: 'Chrome DevTools', logo: '/logos/chrome-dev.svg' },
         { name: 'Jira', logo: '/logos/Jira.svg' },
+        { name: 'MySQL', logo: '/logos/png.png' },
+        { name: 'Git / GitHub', logo: '/logos/git-icon-logo.svg' },
+        { name: 'DevTools', logo: '/logos/chrome-dev.svg' },
     ],
 
     // Cards along the QA connector. Keep this at 4 — the xl curved path is drawn for four nodes
@@ -120,6 +122,27 @@ export const portfolio = {
         'Defect summary dashboards',
         'Release validation notes',
     ],
+    // Editor-style panel in the Automation section.
+    // `depth` drives the tree guides — the component works out ├─ vs └─ itself.
+    // kind: folder | spec | file
+    automationEditor: {
+        fileName: 'test-structure.txt',
+        comment: '// Sample automation structure',
+        tree: [
+            { name: 'tests/', depth: 0, kind: 'folder' },
+            { name: 'auth/', depth: 1, kind: 'folder' },
+            { name: 'login.spec.js', depth: 2, kind: 'spec' },
+            { name: 'pages/', depth: 1, kind: 'folder' },
+            { name: 'LoginPage.js', depth: 2, kind: 'file' },
+            { name: 'fixtures/', depth: 1, kind: 'folder' },
+            { name: 'users.js', depth: 2, kind: 'file' },
+            { name: 'utils/', depth: 1, kind: 'folder' },
+            { name: 'testData.js', depth: 2, kind: 'file' },
+        ],
+        focusLabel: 'Focus:',
+        focus: ['reusable selectors', 'clear assertions', 'stable test data', 'regression-ready scenarios'],
+    },
+
     automationFocus: [
         'Playwright automation with JavaScript',
         'Reusable Page Object Model architecture',

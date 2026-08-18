@@ -10,16 +10,20 @@ const STAT_ICONS = {
 
 const prefersReducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-/** Counts 0 → target once `run` flips true. Starts at the value under reduced motion. */
+/**
+ * Counts 0 → target once `run` flips true. It still counts under reduced
+ * motion — a number frozen at its final value reads as broken — just quicker,
+ * and nothing moves on screen while it ticks.
+ */
 function useCountUp(target, run) {
-    const [value, setValue] = useState(() => (prefersReducedMotion() ? target : 0));
+    const [value, setValue] = useState(0);
 
     useEffect(() => {
-        if (!run || prefersReducedMotion()) return;
+        if (!run) return;
 
         let frame;
         let started;
-        const DURATION = 1100;
+        const DURATION = prefersReducedMotion() ? 350 : 1100;
 
         const tick = (now) => {
             if (started === undefined) started = now;

@@ -47,24 +47,22 @@ export default function AutomationSection() {
     const openFile = suite.files.find((f) => f.id === openId) ?? suite.files[0];
     const total = suite.run.length + 1; // + summary line
 
+    // Always steps through the run — a Re-run button that no-ops is broken, so
+    // reduced motion only shortens the interval (the per-line slide is dropped
+    // via motion-reduce:animate-none on the lines themselves).
     const runTests = () => {
         clearTimers();
-
-        if (reduced()) {
-            setRevealed(total);
-            setRunning(false);
-            return;
-        }
-
         setRunning(true);
         setRevealed(0);
+
+        const step = reduced() ? 90 : STEP_MS;
 
         for (let i = 1; i <= total; i++) {
             timers.current.push(
                 setTimeout(() => {
                     setRevealed(i);
                     if (i === total) setRunning(false);
-                }, i * STEP_MS),
+                }, i * step),
             );
         }
     };

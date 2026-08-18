@@ -97,7 +97,7 @@ export default function HeroSection() {
                     {/* মোবাইলের খাড়া রেল */}
                     <span className='pointer-events-none absolute bottom-3 left-[15px] top-3 w-px animate-[qa-flow_1.2s_linear_infinite] bg-[repeating-linear-gradient(to_bottom,var(--color-rail)_0_5px,transparent_5px_14px)] bg-[length:1px_14px] sm:left-[19px] xl:hidden'>
                         {/* রেল বেয়ে নেমে আসা পালস — xl এ SVG এর dot এটার কাজ করে */}
-                        <span className='absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 animate-[qa-dot_5s_linear_infinite] rounded-full bg-accent-strong shadow-[0_0_12px_4px_var(--color-rail)] motion-reduce:hidden' />
+                        <span className='absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 animate-[qa-dot_5s_linear_infinite] rounded-full bg-accent-strong shadow-[0_0_12px_4px_var(--color-rail)]' />
                     </span>
 
                     {/* xl এর বাঁকা পথ */}
@@ -151,7 +151,7 @@ export default function HeroSection() {
                                 <span className='absolute -left-[30px] top-1/2 h-2.5 w-2.5 -translate-y-1/2 rounded-full bg-accent-strong ring-4 ring-accent-tint sm:-left-[34px] xl:hidden'>
                                     <span
                                         style={{ animationDelay: `${i * 400}ms` }}
-                                        className='absolute inset-0 animate-[node-pulse_2.4s_ease-in-out_infinite] rounded-full motion-reduce:animate-none'
+                                        className='absolute inset-0 animate-[node-pulse_2.4s_ease-in-out_infinite] rounded-full'
                                     />
                                 </span>
 
@@ -222,7 +222,7 @@ export default function HeroSection() {
                                                     width: barsVisible ? `${level}%` : '0%',
                                                     transitionDelay: `${i * 140}ms`,
                                                 }}
-                                                className='relative h-full overflow-hidden rounded-full bg-gradient-to-r from-cyan-600 to-blue-700 shadow-[0_0_10px_var(--color-accent-line)] transition-[width] duration-[1100ms] ease-out motion-reduce:transition-none dark:from-cyan-400 dark:to-blue-500'>
+                                                className='relative h-full overflow-hidden rounded-full bg-gradient-to-r from-cyan-600 to-blue-700 shadow-[0_0_10px_var(--color-accent-line)] transition-[width] duration-[1100ms] ease-out dark:from-cyan-400 dark:to-blue-500'>
                                                 <span className='absolute inset-0 animate-[bar-shimmer_2.4s_ease-in-out_infinite] bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent)]' />
                                             </div>
                                         </div>

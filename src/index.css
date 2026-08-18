@@ -144,11 +144,11 @@ body {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .animate-\[qa-flow_1\.2s_linear_infinite\] {
-        animation: none;
-    }
-}
+/* NOTE: the hero's ambient motion (rail flow, travelling pulse, node pulses,
+   bar shimmer) deliberately runs even under prefers-reduced-motion. The xl
+   connector uses SVG SMIL, which ignores CSS media queries, so gating only the
+   CSS half made the mobile view look broken next to a working desktop one.
+   Page-level section reveals still honour the preference — see Reveal.jsx. */
 /* Travelling pulse down the mobile QA rail (the xl view uses the SVG path instead) */
 @keyframes qa-dot {
     0% {
@@ -222,8 +222,3 @@ body {
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .animate-\[bar-shimmer_2\.4s_ease-in-out_infinite\] {
-        animation: none;
-    }
-}

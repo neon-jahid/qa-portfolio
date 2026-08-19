@@ -15,17 +15,17 @@ export default function ToolChips({ title, tools }) {
                 {tools.map((tool) => (
                     <div
                         key={tool.name}
-                        className='flex items-center gap-2.5 rounded-xl border border-line bg-slab px-4 py-3 text-sm text-heading transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-line hover:text-accent'>
+                        className='group flex items-center gap-2.5 rounded-xl border border-line bg-slab px-4 py-3 text-sm text-heading transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-line hover:text-accent'>
                         {tool.logo ? (
                             <img
                                 src={tool.logo}
                                 alt=''
-                                className='h-5 w-5 shrink-0 object-contain'
+                                className='h-5 w-5 shrink-0 object-contain transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110'
                             />
                         ) : (
                             <Code2
                                 size={18}
-                                className='shrink-0 text-accent'
+                                className='shrink-0 text-accent transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110'
                             />
                         )}
                         {tool.name}

@@ -52,9 +52,12 @@ function Stat({ item, run }) {
     const display = parsed ? `${counted}${parsed[2]}` : item.value;
 
     return (
-        <div className='flex items-center gap-3 px-4 py-3'>
-            <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-hairline bg-tile text-accent'>
-                <Icon size={20} />
+        <div className='group flex items-center gap-3 px-4 py-3'>
+            <span className='flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-hairline bg-tile text-accent transition-colors duration-300 group-hover:border-accent-line group-hover:bg-accent-tint'>
+                <Icon
+                    size={20}
+                    className='transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110'
+                />
             </span>
 
             <div>

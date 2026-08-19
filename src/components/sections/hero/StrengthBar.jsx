@@ -9,8 +9,11 @@
 export default function StrengthBar({ name, level, icon: Icon, filled, index }) {
     return (
         <div className='group flex items-center gap-4'>
-            <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-hairline bg-tile text-accent transition-colors duration-300 group-hover:border-accent-line'>
-                <Icon size={18} />
+            <span className='flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-hairline bg-tile text-accent transition-colors duration-300 group-hover:border-accent-line group-hover:bg-accent-tint'>
+                <Icon
+                    size={18}
+                    className='transition-transform duration-300 ease-out group-hover:-rotate-6 group-hover:scale-110'
+                />
             </span>
 
             <div className='min-w-0 flex-1'>

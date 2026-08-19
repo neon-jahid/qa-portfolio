@@ -29,7 +29,10 @@ export default function HeroCheckCard({ check, index }) {
 
             <div className='flex items-center gap-3'>
                 <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 group-hover:scale-110 ${tone.tile}`}>
-                    <Icon size={18} />
+                    <Icon
+                        size={18}
+                        className='transition-transform duration-300 ease-out group-hover:-rotate-6'
+                    />
                 </span>
 
                 <div className='leading-tight'>

@@ -36,7 +36,10 @@ export default function HeroIntro({ availability, name, role, tagline, resumeUrl
                 <a
                     href='#contact'
                     className='group inline-flex items-center gap-2.5 rounded-xl bg-brand px-6 py-3.5 font-semibold text-on-brand shadow-lg shadow-accent-tint transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong'>
-                    <Users size={18} />
+                    <Users
+                        size={18}
+                        className='transition-transform duration-300 ease-out group-hover:scale-110'
+                    />
                     Let's Work Together
                     <ArrowRight
                         size={18}
@@ -48,8 +51,12 @@ export default function HeroIntro({ availability, name, role, tagline, resumeUrl
                     href={resumeUrl}
                     target='_blank'
                     rel='noopener noreferrer'
-                    className='inline-flex items-center gap-2.5 rounded-xl border border-line px-6 py-3.5 font-semibold text-heading transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-line hover:bg-card-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong'>
-                    <Download size={18} />
+                    className='group inline-flex items-center gap-2.5 rounded-xl border border-line px-6 py-3.5 font-semibold text-heading transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-line hover:bg-card-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong'>
+                    {/* the glyph dips toward the "download" the way the arrow slides on the CTA above */}
+                    <Download
+                        size={18}
+                        className='transition-transform duration-300 ease-out group-hover:translate-y-0.5 group-hover:scale-110'
+                    />
                     Download CV
                 </a>
             </div>

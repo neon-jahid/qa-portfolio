@@ -228,6 +228,21 @@ body {
     }
 }
 
+/* Soft halo breathing behind the hero dashboard shield. Paused for
+   prefers-reduced-motion (motion-reduce:animate-none on the element) — unlike
+   the ambient rail motion above, nothing here breaks by standing still. */
+@keyframes shield-halo {
+    0%,
+    100% {
+        opacity: 0.45;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.12);
+    }
+}
+
 @keyframes bar-shimmer {
     0% {
         transform: translateX(-100%);

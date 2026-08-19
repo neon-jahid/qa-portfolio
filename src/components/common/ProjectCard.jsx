@@ -1,7 +1,12 @@
 import { ArrowUpRight } from 'lucide-react';
 import { toneAt } from '../../lib/tones';
+import { twoDigit } from '../../lib/format';
 
-const num = (i) => String(i + 1).padStart(2, '0');
+/* ============================================================================
+ * PROJECT CARD
+ * One project tile, shared by the work section (and anywhere else a project
+ * needs rendering). `index` picks the tone and prints the 01/02 number.
+ * ==========================================================================*/
 
 export default function ProjectCard({ project, index = 0 }) {
     const tone = toneAt(index);
@@ -28,7 +33,7 @@ export default function ProjectCard({ project, index = 0 }) {
                         <Icon size={22} />
                     </span>
 
-                    <span className={`font-mono text-xs font-semibold ${tone.text}`}>{num(index)}</span>
+                    <span className={`font-mono text-xs font-semibold ${tone.text}`}>{twoDigit(index)}</span>
                 </div>
 
                 <h3 className='flex items-center gap-1.5 text-xl font-bold text-heading sm:text-2xl'>

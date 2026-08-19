@@ -1,6 +1,12 @@
 import { Moon, Sun } from 'lucide-react';
 import useTheme from '../../hooks/useTheme';
 
+/* ============================================================================
+ * THEME TOGGLE
+ * Sun/moon switch in the navbar. All the light/dark logic lives in useTheme;
+ * this is just the button.
+ * ==========================================================================*/
+
 export default function ThemeToggle({ className = '' }) {
     const { theme, toggleTheme } = useTheme();
     const isDark = theme === 'dark';

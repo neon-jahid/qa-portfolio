@@ -1,3 +1,10 @@
+/* ============================================================================
+ * CODE BLOCK
+ * Tiny standalone syntax highlighter for the automation section — a full
+ * library would be far more weight than these few snippets are worth.
+ * Tokens map to the --color-syntax-* variables in index.css.
+ * ==========================================================================*/
+
 const KEYWORDS = new Set([
     'import',
     'from',

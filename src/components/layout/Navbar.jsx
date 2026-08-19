@@ -2,8 +2,22 @@ import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import Container from '../common/Container';
 import ThemeToggle from '../common/ThemeToggle';
+import DesktopNav from './navbar/DesktopNav';
+import MobileNav from './navbar/MobileNav';
 import useActiveSection from '../../hooks/useActiveSection';
 import { navItems, portfolio } from '../../data/portfolioData';
+
+/* ============================================================================
+ * NAVBAR
+ *
+ * Sticky header. The links themselves live in:
+ *   navbar/DesktopNav — the lg+ row with the sliding underline
+ *   navbar/MobileNav  — the drop-down below lg
+ *   navbar/NavLink    — the single link both of them render
+ *
+ * `useActiveSection` watches the section ids from navItems and returns the one
+ * currently in view, which is what highlights a link.
+ * ==========================================================================*/
 
 const SECTION_IDS = navItems.map((item) => item.href.slice(1));
 
@@ -14,33 +28,20 @@ export default function Navbar() {
     return (
         <nav className='sticky top-0 z-50 border-b border-line bg-nav backdrop-blur-xl'>
             <Container className='flex items-center justify-between py-4'>
+                {/* ---- Wordmark ---- */}
                 <a
                     href='#home'
                     className='text-lg font-bold tracking-tight text-heading'>
                     {portfolio.name}
                 </a>
 
-                <div className='hidden gap-6 text-sm text-body lg:flex'>
-                    {navItems.map((item) => {
-                        const isActive = item.href.slice(1) === activeId;
+                {/* ---- Links (lg+) ---- */}
+                <DesktopNav
+                    items={navItems}
+                    activeId={activeId}
+                />
 
-                        return (
-                            <a
-                                key={item.href}
-                                href={item.href}
-                                aria-current={isActive ? 'true' : undefined}
-                                className={`relative py-1 transition-colors duration-300 hover:text-accent ${isActive ? 'text-accent' : ''}`}>
-                                {item.label}
-                                {/* underline slides in on the current section */}
-                                <span
-                                    aria-hidden='true'
-                                    className={`absolute inset-x-0 -bottom-0.5 h-px origin-left bg-accent transition-transform duration-300 ${isActive ? 'scale-x-100' : 'scale-x-0'}`}
-                                />
-                            </a>
-                        );
-                    })}
-                </div>
-
+                {/* ---- Theme toggle + burger ---- */}
                 <div className='flex items-center gap-2'>
                     <ThemeToggle />
 
@@ -55,27 +56,13 @@ export default function Navbar() {
                 </div>
             </Container>
 
+            {/* ---- Menu (below lg) ---- */}
             {isMenuOpen && (
-                <div className='border-t border-line bg-nav-solid lg:hidden'>
-                    <Container className='py-4'>
-                        <div className='flex flex-col gap-4 text-sm text-body'>
-                            {navItems.map((item) => {
-                                const isActive = item.href.slice(1) === activeId;
-
-                                return (
-                                    <a
-                                        key={item.href}
-                                        href={item.href}
-                                        aria-current={isActive ? 'true' : undefined}
-                                        className={`transition-colors duration-300 hover:text-accent ${isActive ? 'text-accent' : ''}`}
-                                        onClick={() => setIsMenuOpen(false)}>
-                                        {item.label}
-                                    </a>
-                                );
-                            })}
-                        </div>
-                    </Container>
-                </div>
+                <MobileNav
+                    items={navItems}
+                    activeId={activeId}
+                    onNavigate={() => setIsMenuOpen(false)}
+                />
             )}
         </nav>
     );

@@ -3,6 +3,11 @@ import { useEffect, useState } from 'react';
 
 const SHOW_AFTER = 600;
 
+/* ============================================================================
+ * SCROLL TO TOP
+ * Floating button that appears once the page is scrolled past SHOW_AFTER px.
+ * ==========================================================================*/
+
 export default function ScrollToTop() {
     // Seeded from the current offset so a reload part-way down the page shows
     // the button immediately rather than waiting for the first scroll event.

@@ -75,9 +75,17 @@
 
     /* Decorative: hero rail / connector strokes */
     --color-rail: rgb(8 145 178 / 0.55);
-    --color-grid: rgb(8 145 178 / 0.09);
     --color-pulse-from: rgb(8 145 178 / 0.45);
     --color-pulse-to: rgb(8 145 178 / 0);
+
+    /* Decorative: page backdrop (src/components/backdrop/*).
+       `grid-fine`/`grid-bold` are the two scales of the blueprint grid,
+       `glow-*` the ambient corner washes, `scan` the sweeping test-run beam. */
+    --color-grid-fine: rgb(15 23 42 / 0.045);
+    --color-grid-bold: rgb(8 145 178 / 0.1);
+    --color-glow-primary: rgb(8 145 178 / 0.14);
+    --color-glow-secondary: rgb(59 130 246 / 0.1);
+    --color-scan: rgb(8 145 178 / 0.35);
 }
 
 :root {
@@ -141,9 +149,14 @@
     --color-term-fail: #f87171;
 
     --color-rail: rgb(34 211 238 / 0.55);
-    --color-grid: rgb(34 211 238 / 0.07);
     --color-pulse-from: rgb(34 211 238 / 0.5);
     --color-pulse-to: rgb(34 211 238 / 0);
+
+    --color-grid-fine: rgb(255 255 255 / 0.028);
+    --color-grid-bold: rgb(34 211 238 / 0.085);
+    --color-glow-primary: rgb(34 211 238 / 0.16);
+    --color-glow-secondary: rgb(59 130 246 / 0.14);
+    --color-scan: rgb(34 211 238 / 0.45);
 }
 
 html {
@@ -253,3 +266,46 @@ body {
     }
 }
 
+
+/* ------------------------------------------------------------------
+   Page backdrop — the beam that sweeps down the grid like a test run
+   crawling a suite. Driven by components/backdrop/ScanBeam.jsx, which
+   sets only the duration/delay inline so this stays the single source
+   of the motion itself.
+   ------------------------------------------------------------------ */
+@keyframes qa-scan {
+    0% {
+        transform: translate3d(0, -10vh, 0);
+        opacity: 0;
+    }
+    12%,
+    88% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(0, 110vh, 0);
+        opacity: 0;
+    }
+}
+
+/* ------------------------------------------------------------------
+   Marquee — one seamless loop is exactly half the track, because
+   components/common/Marquee.jsx renders its children twice side by side.
+   ------------------------------------------------------------------ */
+@keyframes marquee-left {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes marquee-right {
+    from {
+        transform: translate3d(-50%, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}

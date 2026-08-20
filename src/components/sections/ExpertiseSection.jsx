@@ -4,7 +4,7 @@ import SectionTitle from '../common/SectionTitle';
 import ExpertiseList from './expertise/ExpertiseList';
 import ExpertiseDetail from './expertise/ExpertiseDetail';
 import { toneAt } from '../../lib/tones';
-import { portfolio } from '../../data/portfolioData';
+import { expertise } from '../../data/expertise';
 
 /* ============================================================================
  * SECTION: EXPERTISE (#expertise) — "What I Do Best"
@@ -16,7 +16,6 @@ import { portfolio } from '../../data/portfolioData';
  * ==========================================================================*/
 
 export default function ExpertiseSection() {
-    const { expertise } = portfolio;
     const [active, setActive] = useState(0);
 
     return (

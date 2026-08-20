@@ -2,12 +2,12 @@ import Section from '../common/Section';
 import SectionTitle from '../common/SectionTitle';
 import SkillGroupCard from './skills/SkillGroupCard';
 import { toneAt } from '../../lib/tones';
-import { portfolio } from '../../data/portfolioData';
+import { skills } from '../../data/skills';
 
 /* ============================================================================
  * SECTION: SKILLS (#skills) — "Tools & Tech Stack"
  *
- * A responsive grid of group cards, one per key in portfolioData.skills:
+ * A responsive grid of group cards, one per key in data/skills.js:
  *   skills/SkillGroupCard   — the card (icon tile + pills)
  *   skills/skillGroupIcons  — group name → lucide icon
  * ==========================================================================*/
@@ -22,7 +22,7 @@ export default function SkillsSection() {
             />
 
             <div className='grid gap-5 sm:grid-cols-2 lg:grid-cols-3'>
-                {Object.entries(portfolio.skills).map(([group, items], i) => (
+                {Object.entries(skills).map(([group, items], i) => (
                     <SkillGroupCard
                         key={group}
                         group={group}

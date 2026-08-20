@@ -43,7 +43,7 @@ const TOKEN_CLASS = {
 };
 
 /**
- * Minimal JS/JSON tokenizer — enough for the snippets in portfolioData, not a
+ * Minimal JS/JSON tokenizer — enough for the snippets in data/automationSuite.js, not a
  * general parser. Order matters: comments and strings are consumed first so a
  * `/` inside them is never mistaken for a regex literal.
  */

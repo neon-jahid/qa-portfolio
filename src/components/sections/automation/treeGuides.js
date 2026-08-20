@@ -8,7 +8,7 @@ import { FileCode2, FileJson2 } from 'lucide-react';
 export const FILE_ICON = { spec: FileCode2, data: FileJson2, file: FileCode2 };
 
 /**
- * Turns the flat `tree` list in portfolioData into ├─ / └─ prefixes.
+ * Turns the flat `tree` list in data/automationSuite.js into ├─ / └─ prefixes.
  * Each node only knows its own depth, so for every node we look ahead: if a
  * later node sits at the same depth before the list drops shallower, this node
  * still has a sibling below it and gets ├─ (plus a │ carried down for its

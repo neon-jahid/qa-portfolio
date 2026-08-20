@@ -1,7 +1,7 @@
 import Section from '../common/Section';
 import ContactPitch from './contact/ContactPitch';
 import EmailCard from './contact/EmailCard';
-import { portfolio } from '../../data/portfolioData';
+import { profile } from '../../data/profile';
 
 /* ============================================================================
  * SECTION: CONTACT (#contact)
@@ -24,8 +24,8 @@ export default function ContactSection() {
                 />
 
                 <div className='relative grid gap-6 md:grid-cols-[1.05fr_0.95fr] md:items-center md:gap-8 lg:gap-12'>
-                    <ContactPitch location={portfolio.location} />
-                    <EmailCard email={portfolio.email} />
+                    <ContactPitch location={profile.location} />
+                    <EmailCard email={profile.email} />
                 </div>
             </div>
         </Section>

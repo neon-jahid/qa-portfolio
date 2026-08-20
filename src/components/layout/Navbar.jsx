@@ -5,7 +5,8 @@ import ThemeToggle from '../common/ThemeToggle';
 import DesktopNav from './navbar/DesktopNav';
 import MobileNav from './navbar/MobileNav';
 import useActiveSection from '../../hooks/useActiveSection';
-import { navItems, portfolio } from '../../data/portfolioData';
+import { navItems } from '../../data/navigation';
+import { profile } from '../../data/profile';
 
 /* ============================================================================
  * NAVBAR
@@ -32,7 +33,7 @@ export default function Navbar() {
                 <a
                     href='#home'
                     className='text-lg font-bold tracking-tight text-heading'>
-                    {portfolio.name}
+                    {profile.name}
                 </a>
 
                 {/* ---- Links (lg+) ---- */}

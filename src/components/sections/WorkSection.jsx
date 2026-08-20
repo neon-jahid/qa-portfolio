@@ -3,7 +3,7 @@ import SectionTitle from '../common/SectionTitle';
 import ExperienceCard from './work/ExperienceCard';
 import ProjectGrid from './work/ProjectGrid';
 import { toneAt } from '../../lib/tones';
-import { portfolio } from '../../data/portfolioData';
+import { experience, projects } from '../../data/work';
 
 /* ============================================================================
  * SECTION: WORK (#work) — "Where I Have Proven It"
@@ -23,7 +23,7 @@ export default function WorkSection() {
             />
 
             {/* ---- Roles ---- */}
-            {portfolio.experience.map((job, i) => (
+            {experience.map((job, i) => (
                 <ExperienceCard
                     key={job.company}
                     job={job}
@@ -34,7 +34,7 @@ export default function WorkSection() {
             {/* ---- Projects ---- */}
             <h3 className='mb-6 mt-14 text-xl font-bold text-heading sm:text-2xl'>Selected Projects</h3>
 
-            <ProjectGrid projects={portfolio.projects} />
+            <ProjectGrid projects={projects} />
         </Section>
     );
 }

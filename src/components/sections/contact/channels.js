@@ -1,7 +1,7 @@
 import { Phone } from 'lucide-react';
 import { GitHubIcon, LinkedInIcon } from '../../common/BrandIcons';
 import { TONES } from '../../../lib/tones';
-import { portfolio } from '../../../data/portfolioData';
+import { profile } from '../../../data/profile';
 
 /* ============================================================================
  * CONTACT — SECONDARY CHANNELS
@@ -13,21 +13,21 @@ export const SECONDARY_CHANNELS = [
     {
         label: 'GitHub',
         icon: GitHubIcon,
-        href: portfolio.github,
+        href: profile.github,
         tone: TONES.violet,
         external: true,
     },
     {
         label: 'LinkedIn',
         icon: LinkedInIcon,
-        href: portfolio.linkedin,
+        href: profile.linkedin,
         tone: TONES.blue,
         external: true,
     },
     {
         label: 'Call',
         icon: Phone,
-        href: `tel:${portfolio.phone}`,
+        href: `tel:${profile.phone}`,
         tone: TONES.cyan,
     },
 ];

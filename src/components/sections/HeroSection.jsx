@@ -4,7 +4,8 @@ import HeroBackdrop from './hero/HeroBackdrop';
 import HeroIntro from './hero/HeroIntro';
 import HeroCheckFlow from './hero/HeroCheckFlow';
 import HeroDashboard from './hero/HeroDashboard';
-import { portfolio } from '../../data/portfolioData';
+import { hero } from '../../data/hero';
+import { profile } from '../../data/profile';
 
 /* ============================================================================
  * SECTION: HERO (#home)
@@ -15,12 +16,14 @@ import { portfolio } from '../../data/portfolioData';
  *   hero/HeroCheckFlow — the animated QA-check flow line
  *   hero/HeroDashboard — strengths bars + tool chips
  *
- * All copy comes from src/data/portfolioData.js and is passed down as props,
+ * Copy comes from data/hero.js (plus the name and role in data/profile.js)
+ * and is passed down as props,
  * so the parts stay presentational.
  * ==========================================================================*/
 
 export default function HeroSection() {
-    const { availability, name, role, heroTagline, resumeUrl, stats, heroQuote, heroDashboard, coreStrengths, testingTools, heroChecks } = portfolio;
+    const { name, role, resumeUrl } = profile;
+    const { availability, tagline, quote, stats, dashboard, coreStrengths, testingTools, checks } = hero;
 
     return (
         <section
@@ -35,16 +38,16 @@ export default function HeroSection() {
                     availability={availability}
                     name={name}
                     role={role}
-                    tagline={heroTagline}
+                    tagline={tagline}
                     resumeUrl={resumeUrl}
                     stats={stats}
                 />
 
-                <HeroCheckFlow checks={heroChecks} />
+                <HeroCheckFlow checks={checks} />
 
                 <HeroDashboard
-                    dashboard={heroDashboard}
-                    quote={heroQuote}
+                    dashboard={dashboard}
+                    quote={quote}
                     strengths={coreStrengths}
                     tools={testingTools}
                 />

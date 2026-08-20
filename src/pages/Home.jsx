@@ -10,14 +10,14 @@ import ContactSection from '../components/sections/ContactSection';
 /* ============================================================================
  * HOME — the single page, in scroll order.
  *
- * Every section below is a thin composer: it pulls its copy from
- * src/data/portfolioData.js and hands it to the small parts that live in its
- * own folder (e.g. HeroSection -> components/sections/hero/*). So:
- *   change wording or data  -> src/data/portfolioData.js
+ * Every section below is a thin composer: it pulls its copy from its own data
+ * module and hands it to the small parts that live in its own folder
+ * (e.g. HeroSection -> data/hero.js + components/sections/hero/*). So:
+ *   change wording or data  -> the matching file in src/data/ (see data/portfolioData.js)
  *   change a section layout -> that section's file
  *   change one piece of UI  -> the matching file in the section's folder
  *
- * The nav order in portfolioData.navItems must match the ids used here.
+ * The nav order in src/data/navigation.js must match the ids used here.
  * ==========================================================================*/
 
 export default function Home() {

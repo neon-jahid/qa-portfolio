@@ -4,12 +4,12 @@ import SectionTitle from '../common/SectionTitle';
 import ArchitecturePanel from './automation/ArchitecturePanel';
 import EditorPanel from './automation/EditorPanel';
 import useTestRun from './automation/useTestRun';
-import { portfolio } from '../../data/portfolioData';
+import { automationSuite as suite } from '../../data/automationSuite';
 
 /* ============================================================================
  * SECTION: AUTOMATION (#automation) — "Automation in Practice"
  *
- * Two cards side by side, both fed from portfolioData.automationSuite:
+ * Two cards side by side, both fed from data/automationSuite.js:
  *   automation/ArchitecturePanel — file tree + testing-focus tiles
  *   automation/EditorPanel       — tabs, code, terminal
  *
@@ -19,8 +19,6 @@ import { portfolio } from '../../data/portfolioData';
  * ==========================================================================*/
 
 export default function AutomationSection() {
-    const suite = portfolio.automationSuite;
-
     const [openId, setOpenId] = useState(suite.files[0].id);
     const openFile = suite.files.find((file) => file.id === openId) ?? suite.files[0];
 

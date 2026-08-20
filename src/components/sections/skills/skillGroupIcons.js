@@ -2,7 +2,7 @@ import { TestTube2, Braces, Layers3, FileText, Wrench, LayoutDashboard } from 'l
 
 /* ============================================================================
  * SKILLS — GROUP ICONS
- * Keyed by the group names in portfolioData.skills. Add a group there, add its
+ * Keyed by the group names in data/skills.js. Add a group there, add its
  * icon here (a missing entry renders no glyph).
  * ==========================================================================*/
 
